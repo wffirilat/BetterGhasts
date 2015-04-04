@@ -1,0 +1,28 @@
+Speed boost air -- 3
+Helium(Step up) -- 1
+Poison gas-- w/decay--w/randomupdatetics --w/gasjets --3
+Flame ghast -- Vulcan biome-- 1
+Dark ghast -- blind -- preshot -- 3
+Homing ghast --8
+Retexture/particle fireball --5
+Wings of Icarus armor--oneshottable-- teirs-- flying --6
+Ghast tear crafting -- enchants --2
+Blaze ghast -- groups of 3 -- less explosive -- 1
+Creepy ghast -- more explosive-- 1
+Ender ghast -- Tele target onhit -- 5
+Void ghast -- No armor -- magic damage -- 3
+Jellyfish -- Attack but no chase -- model probs -- 5
+Slime Jelly fish -- Splits into parts -- 7
+Wet suit -- Ignore jellyfish for the most part --6
+Goggles -- water vision -- 8 
+Fins -- speed in water -- 7
+Giant jelly fish-- deep ocean biomes-- 5
+wither jelly fish--projectiles -- 6
+Box jelly fish --insta kill-- box joke -- 2
+Void jelly fish -- fast-- wither -- 6
+Elder brain -- boss-- paralyze(weak20,slow20,nasea) 9 dimension change as reward
+Mind flayer-- paralyzes(short duration)-- eats brain if around player for long time--8
+Mind flayer lair-- sphere-- winding tunnels--elder brain in the middle--5
+Under dark-- Light level always low-- new dimension-- stone caves--8
+Anti mindflayer cap-- stops mindflayer eating -- so players cannot where googles-3
+5X5 crafting table 9
