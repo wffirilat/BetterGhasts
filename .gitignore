@@ -1,0 +1,11 @@
+
+$ cat .gitignore
+/*
+!TODO.txt
+!/src
+!build.gradle
+!*.project
+!/gradle
+!gradlew
+!gradlew.bat
+!.gitignore
