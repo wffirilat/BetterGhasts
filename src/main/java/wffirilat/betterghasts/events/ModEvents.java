@@ -1,7 +1,9 @@
 package wffirilat.betterghasts.events;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ModEvents {
 
@@ -23,5 +25,10 @@ public class ModEvents {
 	 * 	   doSomething;
 	 * }
 	 */
+	
+	@SubscribeEvent
+	public void ghastTears(AnvilUpdateEvent event) {
+		//TODO ghast tear enchantments --2
+	}
 
 }
