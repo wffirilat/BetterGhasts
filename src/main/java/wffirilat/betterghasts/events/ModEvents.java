@@ -16,5 +16,12 @@ public class ModEvents {
 		MinecraftForge.TERRAIN_GEN_BUS.register(terrainEvents);
 		MinecraftForge.ORE_GEN_BUS.register(oreGenEvents);
 	}
+	
+	/* FORMAT
+	 * @SubscribeEvent
+	 * public void whatEver(<EventType> event) {
+	 * 	   doSomething;
+	 * }
+	 */
 
 }
