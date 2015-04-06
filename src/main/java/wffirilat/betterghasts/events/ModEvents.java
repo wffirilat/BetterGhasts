@@ -37,7 +37,7 @@ public class ModEvents {
 			event.output = i;
 			event.cost = 1; // is it possible to make it free? cost = 0 doesn't work
 		}
-		//TODO more ghast tear enchantments --2
+		//TODO 2- more ghast tear enchantments
 	}
 
 }

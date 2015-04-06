@@ -17,8 +17,8 @@ public class ModBlocks {
 		deadGrass = new DeadGrass().setHardness(0.5F);
 		poisonAir = new PoisonAir();
 		
-		//TODO speed boost air
-		//TODO entity.stepHeight air?
+		//TODO 3- speed boost air
+		//TODO 2- entity.stepHeight air?
 
 	}
 

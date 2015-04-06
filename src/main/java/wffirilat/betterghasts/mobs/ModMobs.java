@@ -8,14 +8,14 @@ public class ModMobs {
 	
 	public static void init() {
 
-		//TODO creepy ghast (More explosive) --1
-		//TODO blaze ghast --1
-		//TODO void ghast --3
-		//TODO blinding ghast --3
-		//TODO ender ghast --5
-		//TODO homing ghast? --8
+		//TODO 1- creepy ghast (More explosive)
+		//TODO 1- blaze ghast
+		//TODO 3- void ghast
+		//TODO 3- blinding ghast
+		//TODO 5- ender ghast
+		//TODO 8- homing ghast?
 		
-		//TODO retextured fireballs? --5
+		//TODO 5- retextured fireballs?
 		
 	}
 	

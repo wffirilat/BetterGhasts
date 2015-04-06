@@ -10,11 +10,11 @@ public class ModItems {
 		
 		flameGhastTear = new ModItemBase("flameGhastTear");
 		
-		//TODO more ghast tears --2
+		//TODO 2- more ghast tears
 		
-		//TODO wet suit --6
-		//TODO flippers --7
-		//TODO goggles --8
+		//TODO 6- wet suit
+		//TODO 7- flippers
+		//TODO 8- goggles
 		
 	}
 
