@@ -9,4 +9,3 @@ $ cat .gitignore
 !gradlew
 !gradlew.bat
 !.gitignore
-!*.launch
