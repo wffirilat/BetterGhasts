@@ -10,6 +10,8 @@ public class ModBiomes {
 	public static BiomeGenBase volcanoBiome;
 	public static BiomeGenBase poisonBiome;
 	
+	// these both appear somewhat near spawn in world type: "Better Ghasts"; seed: 7428467300287204440
+	
 
 	public static void init() {
 		poisonBiome = new BiomeGenPoison(137).setBiomeName("Poison").setColor(3470985).func_76733_a(3470985).setTemperatureRainfall(0.95F, 0.9F);
