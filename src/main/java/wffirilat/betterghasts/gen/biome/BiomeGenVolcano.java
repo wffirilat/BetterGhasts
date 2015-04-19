@@ -7,13 +7,15 @@ import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.world.biome.BiomeGenBase;
 import wffirilat.betterghasts.blocks.ModBlocks;
+import wffirilat.betterghasts.mobs.FlameGhast;
 
 public class BiomeGenVolcano extends BiomeGenBase {
 
 	public BiomeGenVolcano(int id) {
 		super(id);
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityGhast.class, 200, 2, 10));
+		this.spawnableMonsterList.add(new SpawnListEntry(FlameGhast.class, 40, 1, 1));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityGhast.class, 400, 2, 10));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityMagmaCube.class, 100, 2, 10));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityBlaze.class, 100, 2, 10));
 		this.spawnableCreatureList.clear();

@@ -8,5 +8,7 @@ tile.betterghasts_lavaGeyser.name=Lava Geyser
 
 item.betterghasts_flameGhastTear.name=Flame Ghast Tear
 
+entity.flameGhast.name=Flame Ghast
+
 generator.Better Ghasts=Better Ghasts
 
