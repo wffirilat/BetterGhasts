@@ -1,5 +1,14 @@
 tile.betterghasts_poisonAir.name=Poison Air
 tile.betterghasts_poisonJet.name=Poison Jet
 tile.betterghasts_deadGrass.name=Dead Grass
+tile.betterghasts_ash.name=Ash
+tile.betterghasts_basalt.name=Basalt
+tile.betterghasts_geyser.name=Geyser
+tile.betterghasts_lavaGeyser.name=Lava Geyser
 
 item.betterghasts_flameGhastTear.name=Flame Ghast Tear
+
+entity.flameGhast.name=Flame Ghast
+
+generator.Better Ghasts=Better Ghasts
+

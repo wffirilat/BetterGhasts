@@ -7,6 +7,8 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 public class ModMobs {
 	
 	public static void init() {
+		
+		createEntity(FlameGhast.class, "flameGhast", 0x150a07, 0x4f271a);
 
 		//TODO 1- creepy ghast (More explosive)
 		//TODO 1- blaze ghast
