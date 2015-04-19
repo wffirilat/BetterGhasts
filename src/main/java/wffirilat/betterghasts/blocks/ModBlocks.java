@@ -10,6 +10,8 @@ public class ModBlocks {
 	public static Block poisonAir;
 	public static Block poisonJet;
 	public static Block deadGrass;
+	public static Block portal;
+	
 
 	public static void init() {
 		
