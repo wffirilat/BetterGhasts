@@ -1,28 +1,35 @@
 package wffirilat.betterghasts.gen.biome;
 
-import java.awt.Color;
-
 import net.minecraft.world.biome.BiomeGenJungle;
 
 public class BiomeGenPoison extends BiomeGenJungle {
 	
-	public int color = Color.magenta.getRGB();
+	public int color0 = 4227072;
+	public int color1 = 32768;
+	public int color2 = 32832;
 
 	public BiomeGenPoison(int p_i1971_1_) {
-		super(p_i1971_1_, false);
-		this.waterColorMultiplier = color;
+		super(p_i1971_1_, true);
+		this.waterColorMultiplier = color0;
+		this.theBiomeDecorator = new BiomeDecoratorPoison();
+		this.theBiomeDecorator.treesPerChunk=10;
+		this.theBiomeDecorator.grassPerChunk = 25;
+        this.theBiomeDecorator.flowersPerChunk = 4;
 	}
 
 	public int getSkyColorByTemp(float temp) {
-		return color;
+		return color0;
 	}
 
-	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_) {
-		return color;
+	public int getBiomeFoliageColor(int x, int y, int z) {
+		double d0 = plantNoise.func_151601_a((double)x * 0.0225D, (double)z * 0.0225D);
+		return d0 < -0.1D ? color0 : (d0 > 0.1d ? color2 : color1);
 	}
 	
-	public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_) {
-		return color;
-	}
+	public int getBiomeGrassColor(int x, int y, int z)
+    {
+        double d0 = plantNoise.func_151601_a((double)x * 0.0225D, (double)z * 0.0225D);
+        return d0 < -0.3D ? color0 : (d0 > 0.3d ? color2 : color1);
+    }
 
 }
