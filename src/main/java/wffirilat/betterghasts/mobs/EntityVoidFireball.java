@@ -9,9 +9,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityBlindFireball extends EntityFireball {
+public class EntityVoidFireball extends EntityFireball {
 
-	public EntityBlindFireball(World p_i1761_1_, EntityLivingBase p_i1761_2_,
+	public EntityVoidFireball(World p_i1761_1_, EntityLivingBase p_i1761_2_,
 			double p_i1761_3_, double p_i1761_5_, double p_i1761_7_) {
 		super(p_i1761_1_, p_i1761_2_, p_i1761_3_, p_i1761_5_, p_i1761_7_);
 	}
@@ -22,9 +22,9 @@ public class EntityBlindFireball extends EntityFireball {
 			if (pos.entityHit != null) {
 				if (pos.entityHit instanceof EntityLivingBase
 						&& !((EntityLivingBase) pos.entityHit)
-								.isPotionActive(Potion.blindness)) {
+								.isPotionActive(Potion.harm)) {
 					((EntityLivingBase) pos.entityHit).addPotionEffect(new PotionEffect(
-							Potion.blindness.id, 100, 2));
+							Potion.harm.id, 1, 1));
 				}
 			}
 
