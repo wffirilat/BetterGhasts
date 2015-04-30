@@ -1,20 +1,23 @@
 package wffirilat.betterghasts.gen.biome;
 
+import wffirilat.betterghasts.mobs.BlindGhast;
 import wffirilat.betterghasts.mobs.FlameGhast;
 import wffirilat.betterghasts.mobs.PoisonGhast;
+import wffirilat.betterghasts.mobs.VoidGhast;
 import net.minecraft.world.biome.BiomeGenJungle;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 
-public class BiomeGenPoison extends BiomeGenJungle {
+public class BiomeGenDark extends BiomeGenJungle {
 	
 	public int color0 = 4227072;
 	public int color1 = 32768;
 	public int color2 = 32832;
 
-	public BiomeGenPoison(int p_i1971_1_) {
+	public BiomeGenDark(int p_i1971_1_) {
 		super(p_i1971_1_, true);
 		this.waterColorMultiplier = color0;
-		this.spawnableMonsterList.add(new SpawnListEntry(PoisonGhast.class, 40, 1, 1));
+		this.spawnableMonsterList.add(new SpawnListEntry(VoidGhast.class, 40, 1, 1));
+		this.spawnableMonsterList.add(new SpawnListEntry(BlindGhast.class, 40, 1, 1));
 		this.theBiomeDecorator = new BiomeDecoratorPoison();
 		this.theBiomeDecorator.treesPerChunk=10;
 		this.theBiomeDecorator.grassPerChunk = 25;

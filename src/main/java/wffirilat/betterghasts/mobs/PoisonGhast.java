@@ -146,7 +146,7 @@ public class PoisonGhast extends EntityGhast {
 	}
 	
 	protected void dropFewItems(boolean player, int looting){
-		this.dropItem(ModItems.flameGhastTear, 1);
+		this.dropItem(ModItems.poisonGhastTear, 1);
 		super.dropFewItems(player, looting);
 		super.dropFewItems(player, looting);
 		

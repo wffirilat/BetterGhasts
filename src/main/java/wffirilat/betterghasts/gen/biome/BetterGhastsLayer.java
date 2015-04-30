@@ -50,6 +50,7 @@ public class BetterGhastsLayer extends GenLayer
             biomes[desertIdx].add(new BiomeEntry(BiomeGenBase.plains, 10));
             biomes[desertIdx].add(new BiomeEntry(ModBiomes.poisonBiome, 10));
             biomes[desertIdx].add(new BiomeEntry(ModBiomes.volcanoBiome, 10));
+            biomes[desertIdx].add(new BiomeEntry(ModBiomes.darkBiome, 10));
         }
     }
 

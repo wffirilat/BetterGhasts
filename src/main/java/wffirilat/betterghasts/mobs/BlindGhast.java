@@ -153,7 +153,7 @@ public class BlindGhast extends EntityGhast {
 	}
 
 	protected void dropFewItems(boolean player, int looting) {
-		this.dropItem(ModItems.flameGhastTear, 1);
+		this.dropItem(ModItems.blindGhastTear, 1);
 		super.dropFewItems(player, looting);
 		super.dropFewItems(player, looting);
 

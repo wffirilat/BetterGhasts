@@ -7,8 +7,6 @@ Homing ghast --8
 Retexture/particle fireball --5
 Wings of Icarus armor--oneshottable-- teirs-- flying --6
 Ghast tear crafting -- enchants --2
-Blaze ghast -- groups of 3 -- less explosive -- 1
-Creepy ghast -- more explosive-- 1
 Ender ghast -- Tele target onhit -- 5
 Void ghast -- No armor -- magic damage -- 3
 Jellyfish -- Attack but no chase -- model probs -- 5
