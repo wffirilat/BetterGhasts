@@ -14,7 +14,6 @@ public class ModMobs {
 		createEntity(CreepyGhast.class, "creepyGhast", 0x150a07, 0x4f271a);
 		createEntity(VoidGhast.class, "voidGhast", 0x150a07, 0x4f271a);
 		createEntity(BlazeGhast.class, "blazeGhast", 0x150a07, 0x4f271a);
-		//TODO 1- blaze ghast
 		//TODO 5- ender ghast
 		//TODO 8- homing ghast?
 		
