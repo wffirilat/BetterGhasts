@@ -17,6 +17,7 @@ public class ModBlocks {
 	public static Block lavaGeyser;
 	public static Block ghastRage;
 	public static Block shadow;
+	public static Block shade;
 
 	public static void init() {
 		
@@ -30,6 +31,7 @@ public class ModBlocks {
 		lavaGeyser = new BlockGeyser(Blocks.lava, "lavaGeyser").setHardness(1.5f).setResistance(15.0f);
 		ghastRage = new GhastRage("ghastRage").setHardness(0.5F).setResistance(15.0f);;
 		shadow = new ModBlockBase("shadow").setHardness(1.5f).setResistance(15.0f);
+		shade = new ModBlockBase("shade").setHardness(2.5f).setResistance(30.0f);
 		//TODO 3- speed boost air
 		//TODO 2- entity.stepHeight air?
 

@@ -17,7 +17,7 @@ public class ModBiomes {
 	public static void init() {
 		poisonBiome = new BiomeGenPoison(137).setBiomeName("Poison").setColor(3470985).func_76733_a(3470985).setTemperatureRainfall(0.95F, 0.9F);
 		volcanoBiome = new BiomeGenVolcano(138).setBiomeName("Volcano Planes").setTemperatureRainfall(2.0f, 0.0f);
-		darkBiome = new BiomeGenPoison(139).setBiomeName("Poison").setColor(3470985).func_76733_a(3470985).setTemperatureRainfall(0.95F, 0.9F);
+		darkBiome = new BiomeGenDark(137).setBiomeName("Dark").setTemperatureRainfall(0.95F, 0.9F);
 		
 		BiomeDictionary.registerBiomeType(poisonBiome, Type.SWAMP);
 		BiomeDictionary.registerBiomeType(volcanoBiome, Type.FOREST);
