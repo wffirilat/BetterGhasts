@@ -1,12 +1,7 @@
 package wffirilat.betterghasts.dimension;
 
-import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SHROOM;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_BRIDGE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE;
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.QUARTZ;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.FIRE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.GLOWSTONE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA;
 
 import java.util.List;
 import java.util.Random;
@@ -23,15 +18,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCavesHell;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.feature.WorldGenFire;
-import net.minecraft.world.gen.feature.WorldGenFlowers;
-import net.minecraft.world.gen.feature.WorldGenGlowStone1;
-import net.minecraft.world.gen.feature.WorldGenGlowStone2;
-import net.minecraft.world.gen.feature.WorldGenHellLava;
-import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.structure.MapGenNetherBridge;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
@@ -106,7 +94,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 		this.netherNoiseGen7 = (NoiseGeneratorOctaves) noiseGens[6];
 	}
 
-	public void func_147419_a(int p_147419_1_, int p_147419_2_, Block[] p_147419_3_) {
+	public void func_147419_a(int p_147419_1_, int p_147419_2_, Block[] blocks) {
 		byte b0 = 4;
 		byte b1 = 32;
 		int k = b0 + 1;
@@ -152,7 +140,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 									block = Blocks.stone;
 								}
 
-								p_147419_3_[j2] = block;
+								blocks[j2] = block;
 								j2 += short1;
 								d15 += d16;
 							}
