@@ -32,6 +32,18 @@ public class WorldProviderUnderdark extends WorldProvider
     {
         return Vec3.createVectorHelper(0, 0, 0);
     }
+    
+    public String getWelcomeMessage() {
+    	return "Delving into the Underdark";
+    }
+    
+    public String getDepartMessage() {
+    	return "Climbing out of the Underdark";
+    }
+    
+    public double getMovementFactor() {
+    	return 0.125D;
+    }
 
     /**
      * Creates the light to brightness table
@@ -40,10 +52,10 @@ public class WorldProviderUnderdark extends WorldProvider
     {
         float f = 0.1F;
 
-        for (int i = 0; i <= 15; ++i)
+        for (int level = 0; level <= 15; ++level)
         {
-            float f1 = 1.0F - (float)i / 15.0F;
-            this.lightBrightnessTable[i] = ((1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f);
+            float f1 = 1.0F - (float)level / 15.0F;
+            this.lightBrightnessTable[level] = ((1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f) / 10.0f;
         }
     }
 
