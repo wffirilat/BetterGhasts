@@ -4,17 +4,12 @@ import net.minecraftforge.common.DimensionManager;
 
 public class ModDimensions {
 	
-	public static void init() {
-		registerUnderdark();
-	}
+	public static int underdarkId = 8;
 	
-	public static final int dimensionId = 8;
+	public static void init() {
 
-	public static void registerUnderdark() {
-		
-		DimensionManager.registerProviderType(dimensionId, WorldProviderUnderdark.class, false);
-		DimensionManager.registerDimension(dimensionId, dimensionId);
-		
+		DimensionManager.registerProviderType(underdarkId, WorldProviderUnderdark.class, true);
+		DimensionManager.registerDimension(underdarkId, underdarkId);
 		
 	}
 
