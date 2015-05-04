@@ -9,6 +9,9 @@ import wffirilat.betterghasts.gen.ModOreGenerators;
 import wffirilat.betterghasts.gen.biome.ModBiomes;
 import wffirilat.betterghasts.gen.biome.WorldTypeBetterGhasts;
 import wffirilat.betterghasts.items.ModItems;
+import wffirilat.betterghasts.lib.Constants;
+import wffirilat.betterghasts.gen.ModOreGenerators;
+import wffirilat.betterghasts.items.enchantments.ModEnchantments;
 import wffirilat.betterghasts.items.recipes.ModRecipies;
 import wffirilat.betterghasts.lib.Constants;
 import wffirilat.betterghasts.mobs.ModMobs;
@@ -44,6 +47,7 @@ public class BetterGhasts {
 		ModBiomes.init();
 		ModEvents.init();
 		ModDimensions.init();
+		ModEnchantments.init();
 
 		proxy.registerRenderers();
 
