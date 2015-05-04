@@ -7,8 +7,12 @@ public class PotionEnchantment extends Enchantment {
 	
 	public static int potionId;
 
-	protected PotionEnchantment(int p_i1926_1_, int p_i1926_2_, int potionId) {
-		super(p_i1926_1_, p_i1926_2_, EnumEnchantmentType.weapon);
+	protected PotionEnchantment(int id, int rarity, int potionId) {
+		super(id, rarity, EnumEnchantmentType.weapon);
 		this.potionId = potionId;
 	}
+	
+	public int getMaxLevel() {
+        return 4;
+    }
 }
