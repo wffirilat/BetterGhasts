@@ -1,5 +1,6 @@
-package wffirilat.betterghasts.dimension;
+package wffirilat.betterghasts.dimensions;
 
+import wffirilat.betterghasts.dimensions.underdark.WorldProviderUnderdark;
 import net.minecraftforge.common.DimensionManager;
 
 public class ModDimensions {

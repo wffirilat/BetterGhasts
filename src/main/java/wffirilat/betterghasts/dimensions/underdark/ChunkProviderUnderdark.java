@@ -1,4 +1,4 @@
-package wffirilat.betterghasts.dimension;
+package wffirilat.betterghasts.dimensions.underdark;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_BRIDGE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE;

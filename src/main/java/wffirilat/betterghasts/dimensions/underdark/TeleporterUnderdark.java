@@ -1,4 +1,4 @@
-package wffirilat.betterghasts.dimension;
+package wffirilat.betterghasts.dimensions.underdark;
 
 import java.util.ArrayList;
 import java.util.Iterator;

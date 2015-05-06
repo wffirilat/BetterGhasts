@@ -1,5 +1,6 @@
-package wffirilat.betterghasts.dimension;
+package wffirilat.betterghasts.dimensions.underdark;
 
+import wffirilat.betterghasts.dimensions.ModDimensions;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;

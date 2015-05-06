@@ -1,6 +1,6 @@
 package wffirilat.betterghasts.blocks;
 
-import wffirilat.betterghasts.dimension.BlockUnderdarkPortal;
+import wffirilat.betterghasts.dimensions.underdark.BlockUnderdarkPortal;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;

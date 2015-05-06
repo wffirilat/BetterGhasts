@@ -2,7 +2,7 @@ package wffirilat.betterghasts;
 
 import net.minecraft.world.WorldType;
 import wffirilat.betterghasts.blocks.ModBlocks;
-import wffirilat.betterghasts.dimension.ModDimensions;
+import wffirilat.betterghasts.dimensions.ModDimensions;
 import wffirilat.betterghasts.events.ModEvents;
 import wffirilat.betterghasts.events.TerrainEvents;
 import wffirilat.betterghasts.gen.ModOreGenerators;
