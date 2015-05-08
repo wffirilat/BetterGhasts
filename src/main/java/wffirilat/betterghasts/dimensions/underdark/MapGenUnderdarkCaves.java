@@ -11,16 +11,16 @@ import net.minecraft.world.gen.MapGenBase;
 public class MapGenUnderdarkCaves extends MapGenBase {
 	private static final String __OBFID = "CL_00000395";
 
-	protected void func_151544_a(long p_151544_1_, int p_151544_3_, int p_151544_4_, Block[] p_151544_5_, double p_151544_6_, double p_151544_8_, double p_151544_10_) {
-		this.func_151543_a(p_151544_1_, p_151544_3_, p_151544_4_, p_151544_5_, p_151544_6_, p_151544_8_, p_151544_10_, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
+	protected void func_151544_a(long seed, int chunkX, int chunkZ, Block[] blocks, double p_151544_6_, double p_151544_8_, double p_151544_10_) {
+		this.func_151543_a(seed, chunkX, chunkZ, blocks, p_151544_6_, p_151544_8_, p_151544_10_, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
 	}
 
-	protected void func_151543_a(long p_151543_1_, int p_151543_3_, int p_151543_4_, Block[] p_151543_5_, double p_151543_6_, double p_151543_8_, double p_151543_10_, float p_151543_12_, float p_151543_13_, float p_151543_14_, int p_151543_15_, int p_151543_16_, double p_151543_17_) {
-		double d4 = (double) (p_151543_3_ * 16 + 8);
-		double d5 = (double) (p_151543_4_ * 16 + 8);
+	protected void func_151543_a(long seed, int chunkX, int chunkZ, Block[] blocks, double p_151543_6_, double p_151543_8_, double p_151543_10_, float p_151543_12_, float p_151543_13_, float p_151543_14_, int p_151543_15_, int p_151543_16_, double p_151543_17_) {
+		double d4 = (double) (chunkX * 16 + 8);
+		double d5 = (double) (chunkZ * 16 + 8);
 		float f3 = 0.0F;
 		float f4 = 0.0F;
-		Random random = new Random(p_151543_1_);
+		Random random = new Random(seed);
 
 		if (p_151543_16_ <= 0) {
 			int j1 = this.range * 16 - 16;
@@ -59,8 +59,8 @@ public class MapGenUnderdarkCaves extends MapGenBase {
 			f3 += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
 
 			if (!flag1 && p_151543_15_ == k1 && p_151543_12_ > 1.0F) {
-				this.func_151543_a(random.nextLong(), p_151543_3_, p_151543_4_, p_151543_5_, p_151543_6_, p_151543_8_, p_151543_10_, random.nextFloat() * 0.5F + 0.5F, p_151543_13_ - ((float) Math.PI / 2F), p_151543_14_ / 3.0F, p_151543_15_, p_151543_16_, 1.0D);
-				this.func_151543_a(random.nextLong(), p_151543_3_, p_151543_4_, p_151543_5_, p_151543_6_, p_151543_8_, p_151543_10_, random.nextFloat() * 0.5F + 0.5F, p_151543_13_ + ((float) Math.PI / 2F), p_151543_14_ / 3.0F, p_151543_15_, p_151543_16_, 1.0D);
+				this.func_151543_a(random.nextLong(), chunkX, chunkZ, blocks, p_151543_6_, p_151543_8_, p_151543_10_, random.nextFloat() * 0.5F + 0.5F, p_151543_13_ - ((float) Math.PI / 2F), p_151543_14_ / 3.0F, p_151543_15_, p_151543_16_, 1.0D);
+				this.func_151543_a(random.nextLong(), chunkX, chunkZ, blocks, p_151543_6_, p_151543_8_, p_151543_10_, random.nextFloat() * 0.5F + 0.5F, p_151543_13_ + ((float) Math.PI / 2F), p_151543_14_ / 3.0F, p_151543_15_, p_151543_16_, 1.0D);
 				return;
 			}
 
@@ -75,12 +75,12 @@ public class MapGenUnderdarkCaves extends MapGenBase {
 				}
 
 				if (p_151543_6_ >= d4 - 16.0D - d6 * 2.0D && p_151543_10_ >= d5 - 16.0D - d6 * 2.0D && p_151543_6_ <= d4 + 16.0D + d6 * 2.0D && p_151543_10_ <= d5 + 16.0D + d6 * 2.0D) {
-					int i4 = MathHelper.floor_double(p_151543_6_ - d6) - p_151543_3_ * 16 - 1;
-					int l1 = MathHelper.floor_double(p_151543_6_ + d6) - p_151543_3_ * 16 + 1;
+					int i4 = MathHelper.floor_double(p_151543_6_ - d6) - chunkX * 16 - 1;
+					int l1 = MathHelper.floor_double(p_151543_6_ + d6) - chunkX * 16 + 1;
 					int j4 = MathHelper.floor_double(p_151543_8_ - d7) - 1;
 					int i2 = MathHelper.floor_double(p_151543_8_ + d7) + 1;
-					int k4 = MathHelper.floor_double(p_151543_10_ - d6) - p_151543_4_ * 16 - 1;
-					int j2 = MathHelper.floor_double(p_151543_10_ + d6) - p_151543_4_ * 16 + 1;
+					int k4 = MathHelper.floor_double(p_151543_10_ - d6) - chunkZ * 16 - 1;
+					int j2 = MathHelper.floor_double(p_151543_10_ + d6) - chunkZ * 16 + 1;
 
 					if (i4 < 0) {
 						i4 = 0;
@@ -116,7 +116,7 @@ public class MapGenUnderdarkCaves extends MapGenBase {
 								j3 = (k2 * 16 + l2) * 128 + i3;
 
 								if (i3 >= 0 && i3 < 128) {
-									Block block = p_151543_5_[j3];
+									Block block = blocks[j3];
 
 									if (block == Blocks.flowing_lava || block == Blocks.lava) {
 										flag2 = true;
@@ -132,20 +132,20 @@ public class MapGenUnderdarkCaves extends MapGenBase {
 
 					if (!flag2) {
 						for (k2 = i4; k2 < l1; ++k2) {
-							double d13 = ((double) (k2 + p_151543_3_ * 16) + 0.5D - p_151543_6_) / d6;
+							double d13 = ((double) (k2 + chunkX * 16) + 0.5D - p_151543_6_) / d6;
 
 							for (j3 = k4; j3 < j2; ++j3) {
-								double d14 = ((double) (j3 + p_151543_4_ * 16) + 0.5D - p_151543_10_) / d6;
+								double d14 = ((double) (j3 + chunkZ * 16) + 0.5D - p_151543_10_) / d6;
 								int k3 = (k2 * 16 + j3) * 128 + i2;
 
 								for (int l3 = i2 - 1; l3 >= j4; --l3) {
 									double d12 = ((double) l3 + 0.5D - p_151543_8_) / d7;
 
 									if (d12 > -0.7D && d13 * d13 + d12 * d12 + d14 * d14 < 1.0D) {
-										Block block1 = p_151543_5_[k3];
+										Block block1 = blocks[k3];
 
 										if (block1 == Blocks.netherrack || block1 == Blocks.dirt || block1 == Blocks.grass) {
-											p_151543_5_[k3] = null;
+											blocks[k3] = null;
 										}
 									}
 

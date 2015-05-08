@@ -32,9 +32,9 @@ import cpw.mods.fml.common.eventhandler.Event.Result;
 public class ChunkProviderUnderdark implements IChunkProvider {
 	private Random rand;
 	/** A NoiseGeneratorOctaves used in generating nether terrain */
-	private NoiseGeneratorOctaves netherNoiseGen1;
-	private NoiseGeneratorOctaves netherNoiseGen2;
-	private NoiseGeneratorOctaves netherNoiseGen3;
+	private NoiseGeneratorOctaves noiseGen1;
+	private NoiseGeneratorOctaves noiseGen2;
+	private NoiseGeneratorOctaves noiseGen3;
 	/** Determines whether slowsand or gravel can be generated at a location */
 	private NoiseGeneratorOctaves slowsandGravelNoiseGen;
 	/**
@@ -42,8 +42,8 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * location
 	 */
 	private NoiseGeneratorOctaves netherrackExculsivityNoiseGen;
-	public NoiseGeneratorOctaves netherNoiseGen6;
-	public NoiseGeneratorOctaves netherNoiseGen7;
+	public NoiseGeneratorOctaves noiseGen6;
+	public NoiseGeneratorOctaves noiseGen7;
 	/** Is the world that the nether is getting generated. */
 	private World worldObj;
 	private double[] noiseField;
@@ -75,55 +75,55 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	public ChunkProviderUnderdark(World world, long seed) {
 		this.worldObj = world;
 		this.rand = new Random(seed);
-		this.netherNoiseGen1 = new NoiseGeneratorOctaves(this.rand, 16);
-		this.netherNoiseGen2 = new NoiseGeneratorOctaves(this.rand, 16);
-		this.netherNoiseGen3 = new NoiseGeneratorOctaves(this.rand, 8);
+		this.noiseGen1 = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGen2 = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGen3 = new NoiseGeneratorOctaves(this.rand, 8);
 		this.slowsandGravelNoiseGen = new NoiseGeneratorOctaves(this.rand, 4);
 		this.netherrackExculsivityNoiseGen = new NoiseGeneratorOctaves(this.rand, 4);
-		this.netherNoiseGen6 = new NoiseGeneratorOctaves(this.rand, 10);
-		this.netherNoiseGen7 = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGen6 = new NoiseGeneratorOctaves(this.rand, 10);
+		this.noiseGen7 = new NoiseGeneratorOctaves(this.rand, 16);
 
-		NoiseGenerator[] noiseGens = { netherNoiseGen1, netherNoiseGen2, netherNoiseGen3, slowsandGravelNoiseGen, netherrackExculsivityNoiseGen, netherNoiseGen6, netherNoiseGen7 };
+		NoiseGenerator[] noiseGens = { noiseGen1, noiseGen2, noiseGen3, slowsandGravelNoiseGen, netherrackExculsivityNoiseGen, noiseGen6, noiseGen7 };
 		noiseGens = TerrainGen.getModdedNoiseGenerators(world, this.rand, noiseGens);
-		this.netherNoiseGen1 = (NoiseGeneratorOctaves) noiseGens[0];
-		this.netherNoiseGen2 = (NoiseGeneratorOctaves) noiseGens[1];
-		this.netherNoiseGen3 = (NoiseGeneratorOctaves) noiseGens[2];
+		this.noiseGen1 = (NoiseGeneratorOctaves) noiseGens[0];
+		this.noiseGen2 = (NoiseGeneratorOctaves) noiseGens[1];
+		this.noiseGen3 = (NoiseGeneratorOctaves) noiseGens[2];
 		this.slowsandGravelNoiseGen = (NoiseGeneratorOctaves) noiseGens[3];
 		this.netherrackExculsivityNoiseGen = (NoiseGeneratorOctaves) noiseGens[4];
-		this.netherNoiseGen6 = (NoiseGeneratorOctaves) noiseGens[5];
-		this.netherNoiseGen7 = (NoiseGeneratorOctaves) noiseGens[6];
+		this.noiseGen6 = (NoiseGeneratorOctaves) noiseGens[5];
+		this.noiseGen7 = (NoiseGeneratorOctaves) noiseGens[6];
 	}
 
-	public void func_147419_a(int p_147419_1_, int p_147419_2_, Block[] blocks) {
-		byte b0 = 4;
+	public void generateBlockArray(int chunkX, int chunkZ, Block[] blocks) {
+		byte scale = 4;
 		byte b1 = 32;
-		int k = b0 + 1;
-		byte b2 = 17;
-		int l = b0 + 1;
-		this.noiseField = this.initializeNoiseField(this.noiseField, p_147419_1_ * b0, 0, p_147419_2_ * b0, k, b2, l);
+		int xSize = scale + 1;
+		byte ySize = 17;
+		int zSize = scale + 1;
+		this.noiseField = this.initializeNoiseField(this.noiseField, chunkX * scale, 0, chunkZ * scale, xSize, ySize, zSize);
 
-		for (int i1 = 0; i1 < b0; ++i1) {
-			for (int j1 = 0; j1 < b0; ++j1) {
-				for (int k1 = 0; k1 < 16; ++k1) {
+		for (int x1 = 0; x1 < scale; ++x1) {
+			for (int z1 = 0; z1 < scale; ++z1) {
+				for (int y1 = 0; y1 < 16; ++y1) {
 					double d0 = 0.125D;
-					double d1 = this.noiseField[((i1 + 0) * l + j1 + 0) * b2 + k1 + 0];
-					double d2 = this.noiseField[((i1 + 0) * l + j1 + 1) * b2 + k1 + 0];
-					double d3 = this.noiseField[((i1 + 1) * l + j1 + 0) * b2 + k1 + 0];
-					double d4 = this.noiseField[((i1 + 1) * l + j1 + 1) * b2 + k1 + 0];
-					double d5 = (this.noiseField[((i1 + 0) * l + j1 + 0) * b2 + k1 + 1] - d1) * d0;
-					double d6 = (this.noiseField[((i1 + 0) * l + j1 + 1) * b2 + k1 + 1] - d2) * d0;
-					double d7 = (this.noiseField[((i1 + 1) * l + j1 + 0) * b2 + k1 + 1] - d3) * d0;
-					double d8 = (this.noiseField[((i1 + 1) * l + j1 + 1) * b2 + k1 + 1] - d4) * d0;
+					double d1 = this.noiseField[((x1 + 0) * zSize + z1 + 0) * ySize + y1 + 0];
+					double d2 = this.noiseField[((x1 + 0) * zSize + z1 + 1) * ySize + y1 + 0];
+					double d3 = this.noiseField[((x1 + 1) * zSize + z1 + 0) * ySize + y1 + 0];
+					double d4 = this.noiseField[((x1 + 1) * zSize + z1 + 1) * ySize + y1 + 0];
+					double d5 = (this.noiseField[((x1 + 0) * zSize + z1 + 0) * ySize + y1 + 1] - d1) * d0;
+					double d6 = (this.noiseField[((x1 + 0) * zSize + z1 + 1) * ySize + y1 + 1] - d2) * d0;
+					double d7 = (this.noiseField[((x1 + 1) * zSize + z1 + 0) * ySize + y1 + 1] - d3) * d0;
+					double d8 = (this.noiseField[((x1 + 1) * zSize + z1 + 1) * ySize + y1 + 1] - d4) * d0;
 
-					for (int l1 = 0; l1 < 8; ++l1) {
+					for (int i1 = 0; i1 < 8; ++i1) {
 						double d9 = 0.25D;
 						double d10 = d1;
 						double d11 = d2;
 						double d12 = (d3 - d1) * d9;
 						double d13 = (d4 - d2) * d9;
 
-						for (int i2 = 0; i2 < 4; ++i2) {
-							int j2 = i2 + i1 * 4 << 11 | 0 + j1 * 4 << 7 | k1 * 8 + l1;
+						for (int j1 = 0; j1 < 4; ++j1) {
+							int j2 = j1 + x1 * 4 << 11 | 0 + z1 * 4 << 7 | y1 * 8 + i1;
 							short short1 = 128;
 							double d14 = 0.25D;
 							double d15 = d10;
@@ -132,7 +132,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 							for (int k2 = 0; k2 < 4; ++k2) {
 								Block block = null;
 
-								if (k1 * 8 + l1 < b1) {
+								if (y1 * 8 + i1 < b1) {
 									block = Blocks.lava;
 								}
 
@@ -160,7 +160,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	}
 
 	@Deprecated
-	// You should provide meatadata and biome data in the below method
+	// You should provide metadata and biome data in the below method
 	public void func_147418_b(int chunkX, int chunkZ, Block[] blocks) {
 		replaceBiomeBlocks(chunkX, chunkZ, blocks, new byte[blocks.length], null);
 	}
@@ -254,15 +254,15 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 */
 	public Chunk provideChunk(int chunkX, int chunkZ) {
 		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
-		Block[] ablock = new Block[32768];
-		byte[] meta = new byte[ablock.length];
+		Block[] blocks = new Block[32768];
+		byte[] meta = new byte[blocks.length];
 		BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[]) null, chunkX * 16, chunkZ * 16, 16, 16);
 		// Forge Move up to allow for passing to replaceBiomeBlocks
-		this.func_147419_a(chunkX, chunkZ, ablock);
-		this.replaceBiomeBlocks(chunkX, chunkZ, ablock, meta, abiomegenbase);
-		this.netherCaveGenerator.func_151539_a(this, this.worldObj, chunkX, chunkZ, ablock);
-		this.genNetherBridge.func_151539_a(this, this.worldObj, chunkX, chunkZ, ablock);
-		Chunk chunk = new Chunk(this.worldObj, ablock, meta, chunkX, chunkZ);
+		this.generateBlockArray(chunkX, chunkZ, blocks);
+		this.replaceBiomeBlocks(chunkX, chunkZ, blocks, meta, abiomegenbase);
+		this.netherCaveGenerator.func_151539_a(this, this.worldObj, chunkX, chunkZ, blocks);
+		this.genNetherBridge.func_151539_a(this, this.worldObj, chunkX, chunkZ, blocks);
+		Chunk chunk = new Chunk(this.worldObj, blocks, meta, chunkX, chunkZ);
 		byte[] abyte = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte.length; ++k) {
@@ -287,42 +287,42 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 			noisefield = new double[sizeX * sizeY * sizeZ];
 		}
 
-		double d0 = 684.412D;
-		double d1 = 2053.236D;
-		this.noiseData4 = this.netherNoiseGen6.generateNoiseOctaves(this.noiseData4, x, y, z, sizeX, 1, sizeZ, 1.0D, 0.0D, 1.0D);
-		this.noiseData5 = this.netherNoiseGen7.generateNoiseOctaves(this.noiseData5, x, y, z, sizeX, 1, sizeZ, 100.0D, 0.0D, 100.0D);
-		this.noiseData1 = this.netherNoiseGen3.generateNoiseOctaves(this.noiseData1, x, y, z, sizeX, sizeY, sizeZ, d0 / 80.0D, d1 / 60.0D, d0 / 80.0D);
-		this.noiseData2 = this.netherNoiseGen1.generateNoiseOctaves(this.noiseData2, x, y, z, sizeX, sizeY, sizeZ, d0, d1, d0);
-		this.noiseData3 = this.netherNoiseGen2.generateNoiseOctaves(this.noiseData3, x, y, z, sizeX, sizeY, sizeZ, d0, d1, d0);
+		double d0 = 684.412D / 2D;
+		double d1 = 2053.236D / 2D;
+		this.noiseData4 = this.noiseGen6.generateNoiseOctaves(this.noiseData4, x, y, z, sizeX, 1, sizeZ, 1.0D, 0.0D, 1.0D);
+		this.noiseData5 = this.noiseGen7.generateNoiseOctaves(this.noiseData5, x, y, z, sizeX, 1, sizeZ, 100.0D, 0.0D, 100.0D);
+		this.noiseData1 = this.noiseGen3.generateNoiseOctaves(this.noiseData1, x, y, z, sizeX, sizeY, sizeZ, d0 / 80.0D, d1 / 60.0D, d0 / 80.0D);
+		this.noiseData2 = this.noiseGen1.generateNoiseOctaves(this.noiseData2, x, y, z, sizeX, sizeY, sizeZ, d0, d1, d0);
+		this.noiseData3 = this.noiseGen2.generateNoiseOctaves(this.noiseData3, x, y, z, sizeX, sizeY, sizeZ, d0, d1, d0);
 		int k1 = 0;
-		int l1 = 0;
+		int i = 0;
 		double[] adouble1 = new double[sizeY];
-		int i2;
+		int y1;
 
-		for (i2 = 0; i2 < sizeY; ++i2) {
-			adouble1[i2] = Math.cos((double) i2 * Math.PI * 6.0D / (double) sizeY) * 2.0D;
-			double d2 = (double) i2;
+		for (y1 = 0; y1 < sizeY; ++y1) {
+			adouble1[y1] = Math.cos((double) y1 * Math.PI * 6.0D / (double) sizeY) * 2.0D;
+			double d2 = (double) y1;
 
-			if (i2 > sizeY / 2) {
-				d2 = (double) (sizeY - 1 - i2);
+			if (y1 > sizeY / 2) {
+				d2 = (double) (sizeY - 1 - y1);
 			}
 
 			if (d2 < 4.0D) {
 				d2 = 4.0D - d2;
-				adouble1[i2] -= d2 * d2 * d2 * 10.0D;
+				adouble1[y1] -= d2 * d2 * d2 * 10.0D;
 			}
 		}
 
-		for (i2 = 0; i2 < sizeX; ++i2) {
-			for (int k2 = 0; k2 < sizeZ; ++k2) {
-				double d3 = (this.noiseData4[l1] + 256.0D) / 512.0D;
+		for (int x1 = 0; x1 < sizeX; ++x1) {
+			for (int z1 = 0; z1 < sizeZ; ++z1) {
+				double d3 = (this.noiseData4[i] + 256.0D) / 512.0D;
 
 				if (d3 > 1.0D) {
 					d3 = 1.0D;
 				}
 
 				double d4 = 0.0D;
-				double d5 = this.noiseData5[l1] / 8000.0D;
+				double d5 = this.noiseData5[i] / 8000.0D;
 
 				if (d5 < 0.0D) {
 					d5 = -d5;
@@ -350,7 +350,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 
 				d3 += 0.5D;
 				d5 = d5 * (double) sizeY / 16.0D;
-				++l1;
+				++i;
 
 				for (int j2 = 0; j2 < sizeY; ++j2) {
 					double d6 = 0.0D;
@@ -409,7 +409,6 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * Populates chunk with ores etc etc
 	 */
 	public void populate(IChunkProvider p_73153_1_, int chunkX, int chunkZ) {
-		BlockFalling.fallInstantly = true;
 
 		int x = chunkX * 16;
 		int z = chunkZ * 16;
@@ -418,7 +417,6 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(worldObj, rand, x, z));
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(p_73153_1_, worldObj, rand, chunkX, chunkZ, false));
 
-		BlockFalling.fallInstantly = false;
 	}
 
 	/**
@@ -456,7 +454,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * Converts the instance data to a readable string.
 	 */
 	public String makeString() {
-		return "HellRandomLevelSource";
+		return "RandomLevelSource";
 	}
 
 	/**
@@ -478,7 +476,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 		return biomegenbase.getSpawnableList(type);
 	}
 
-	public ChunkPosition func_147416_a(World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_) {
+	public ChunkPosition func_147416_a(World world, String name, int x, int y, int z) {
 		return null;
 	}
 
