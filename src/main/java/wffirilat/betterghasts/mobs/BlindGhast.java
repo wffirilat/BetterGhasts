@@ -20,6 +20,7 @@ public class BlindGhast extends EntityGhast {
 	private Entity targetedEntity;
 	private int explosionStrength = 0;
 	private int aggroCooldown;
+	public float speed = 1f;
 
 	public BlindGhast(World world) {
 		super(world);
@@ -53,9 +54,9 @@ public class BlindGhast extends EntityGhast {
 			d3 = (double) MathHelper.sqrt_double(d3);
 
 			if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3)) {
-				this.motionX += d0 / d3 * 0.2D;
-				this.motionY += d1 / d3 * 0.2D;
-				this.motionZ += d2 / d3 * 0.2D;
+				this.motionX += d0 / d3 * speed / 10.0f;
+				this.motionY += d1 / d3 * speed / 10.0f;
+				this.motionZ += d2 / d3 * speed / 10.0f;
 			} else {
 				this.waypointX = this.posX;
 				this.waypointY = this.posY;
