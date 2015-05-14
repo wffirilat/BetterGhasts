@@ -2,9 +2,9 @@ package wffirilat.betterghasts.dimensions.underdark;
 
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import wffirilat.betterghasts.dimensions.ModDimensions;
+import wffirilat.betterghasts.gen.biome.ModBiomes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -16,7 +16,7 @@ public class WorldProviderUnderdark extends WorldProvider {
 	 */
 	@Override
 	public void registerWorldChunkManager() {
-		this.worldChunkMgr = new WorldChunkManagerUnderdark(BiomeGenBase.mushroomIsland, 0.0F);
+		this.worldChunkMgr = new WorldChunkManagerUnderdark(ModBiomes.underdark, 0.0F);
 		this.isHellWorld = true;
 		this.hasNoSky = true;
 		this.dimensionId = ModDimensions.underdarkId;
