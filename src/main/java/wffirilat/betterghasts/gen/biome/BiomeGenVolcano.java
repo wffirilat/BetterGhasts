@@ -30,6 +30,7 @@ public class BiomeGenVolcano extends BiomeGenBase {
 		this.heightVariation = 0.0f;
 	}
 
+	@Override
 	public int getSkyColorByTemp(float temp) {
 		return Color.red.getRGB();
 	}

@@ -29,10 +29,11 @@ public class BiomeDecoratorVolcano extends BiomeDecorator {
 
 	}
 
+	@Override
 	protected void genDecorations(BiomeGenBase biome) {
 		super.genDecorations(biome);
 		this.generateOres();
-		if (this.randomGenerator.nextInt(chunksPerLake) == 0) {
+		if (this.randomGenerator.nextInt(this.chunksPerLake) == 0) {
 			int x = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			int z = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			this.lakeGen.generate(this.currentWorld, this.randomGenerator, x, this.currentWorld.getHeightValue(x, z), z);
@@ -42,11 +43,11 @@ public class BiomeDecoratorVolcano extends BiomeDecorator {
 			int z = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			this.spikeGen.generate(this.currentWorld, this.randomGenerator, x, this.currentWorld.getHeightValue(x, z), z);
 		}
-		if (this.randomGenerator.nextInt(chunksPerGeyser) == 0) {
+		if (this.randomGenerator.nextInt(this.chunksPerGeyser) == 0) {
 			int x = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			int z = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			int y = this.currentWorld.getHeightValue(x, z);
-			this.geyserGen.generate(currentWorld, randomGenerator, x, y - 1, z);
+			this.geyserGen.generate(this.currentWorld, this.randomGenerator, x, y - 1, z);
 		}
 	}
 }

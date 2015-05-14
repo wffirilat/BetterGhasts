@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityFireball;
-import net.minecraft.init.Items;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
@@ -24,14 +23,17 @@ public class RenderPoisonFireball extends RenderFireball {
 		this.size = size;
 	}
 
+	@Override
 	protected ResourceLocation getEntityTexture(EntityFireball entity) {
 		return this.texture;
 	}
 
+	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return this.getEntityTexture((EntityFireball) entity);
 	}
 
+	@Override
 	public void doRender(EntityFireball p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
 		GL11.glPushMatrix();
 		this.bindEntityTexture(p_76986_1_);
@@ -52,15 +54,16 @@ public class RenderPoisonFireball extends RenderFireball {
 		GL11.glRotatef(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 1.0F, 0.0F);
-		tessellator.addVertexWithUV((double) (0.0F - f8), (double) (0.0F - f9), 0.0D, (double) f3, (double) f6);
-		tessellator.addVertexWithUV((double) (f7 - f8), (double) (0.0F - f9), 0.0D, (double) f4, (double) f6);
-		tessellator.addVertexWithUV((double) (f7 - f8), (double) (1.0F - f9), 0.0D, (double) f4, (double) f5);
-		tessellator.addVertexWithUV((double) (0.0F - f8), (double) (1.0F - f9), 0.0D, (double) f3, (double) f5);
+		tessellator.addVertexWithUV(0.0F - f8, 0.0F - f9, 0.0D, f3, f6);
+		tessellator.addVertexWithUV(f7 - f8, 0.0F - f9, 0.0D, f4, f6);
+		tessellator.addVertexWithUV(f7 - f8, 1.0F - f9, 0.0D, f4, f5);
+		tessellator.addVertexWithUV(0.0F - f8, 1.0F - f9, 0.0D, f3, f5);
 		tessellator.draw();
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		GL11.glPopMatrix();
 	}
 
+	@Override
 	public void doRender(Entity entity, double x, double y, double z, float xrot, float yrot) {
 		this.doRender((EntityFireball) entity, x, y, z, xrot, yrot);
 	}

@@ -6,23 +6,23 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import wffirilat.betterghasts.gen.WorldGenPoisonJet;
 
 public class BiomeDecoratorPoison extends BiomeDecorator {
-	
+
 	public int poisonJetChance = 1;
 	public WorldGenerator jets = new WorldGenPoisonJet();
-	
-	public BiomeDecoratorPoison(){
+
+	public BiomeDecoratorPoison() {
 		super();
 	}
-	
-	protected void genDecorations(BiomeGenBase biome){
-		if(this.randomGenerator.nextInt(this.poisonJetChance)==0){
+
+	@Override
+	protected void genDecorations(BiomeGenBase biome) {
+		if (this.randomGenerator.nextInt(this.poisonJetChance) == 0) {
 			int x = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-            int z = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-            this.jets.generate(currentWorld, randomGenerator, x, currentWorld.getHeightValue(x, z), z);
+			int z = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+			this.jets.generate(this.currentWorld, this.randomGenerator, x, this.currentWorld.getHeightValue(x, z), z);
 		}
 		super.genDecorations(biome);
-		
-		
+
 	}
 
 }

@@ -26,11 +26,13 @@ public class BlindGhast extends EntityGhast {
 		super(world);
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 	}
 
+	@Override
 	protected void updateEntityActionState() {
 		if (!this.worldObj.isRemote && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL) {
 			this.setDead();
@@ -44,19 +46,19 @@ public class BlindGhast extends EntityGhast {
 		double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
 		if (d3 < 1.0D || d3 > 3600.0D) {
-			this.waypointX = this.posX + (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			this.waypointY = this.posY + (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			this.waypointZ = this.posZ + (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+			this.waypointX = this.posX + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
+			this.waypointY = this.posY + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
+			this.waypointZ = this.posZ + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
 		}
 
 		if (this.courseChangeCooldown-- <= 0) {
 			this.courseChangeCooldown += this.rand.nextInt(5) + 2;
-			d3 = (double) MathHelper.sqrt_double(d3);
+			d3 = MathHelper.sqrt_double(d3);
 
 			if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3)) {
-				this.motionX += d0 / d3 * speed / 10.0f;
-				this.motionY += d1 / d3 * speed / 10.0f;
-				this.motionZ += d2 / d3 * speed / 10.0f;
+				this.motionX += d0 / d3 * this.speed / 10.0f;
+				this.motionY += d1 / d3 * this.speed / 10.0f;
+				this.motionZ += d2 / d3 * this.speed / 10.0f;
 			} else {
 				this.waypointX = this.posX;
 				this.waypointY = this.posY;
@@ -92,8 +94,11 @@ public class BlindGhast extends EntityGhast {
 				++this.attackCounter;
 
 				if (this.attackCounter == 20) {
-					if (targetedEntity instanceof EntityLivingBase) { // && !((EntityLivingBase) targetedEntity).isPotionActive(Potion.blindness)) {
-						((EntityLivingBase) targetedEntity).addPotionEffect(new PotionEffect(Potion.blindness.id, 60, 2));
+					if (this.targetedEntity instanceof EntityLivingBase) { // &&
+																			// !((EntityLivingBase)
+																			// targetedEntity).isPotionActive(Potion.blindness))
+																			// {
+						((EntityLivingBase) this.targetedEntity).addPotionEffect(new PotionEffect(Potion.blindness.id, 60, 2));
 					}
 					this.shoot();
 				}
@@ -124,7 +129,7 @@ public class BlindGhast extends EntityGhast {
 		double d6 = (this.waypointZ - this.posZ) / p_70790_7_;
 		AxisAlignedBB axisalignedbb = this.boundingBox.copy();
 
-		for (int i = 1; (double) i < p_70790_7_; ++i) {
+		for (int i = 1; i < p_70790_7_; ++i) {
 			axisalignedbb.offset(d4, d5, d6);
 
 			if (!this.worldObj.getCollidingBoundingBoxes(this, axisalignedbb).isEmpty()) {
@@ -138,21 +143,22 @@ public class BlindGhast extends EntityGhast {
 	public void shoot() {
 		double offset = 4.0D;
 		Vec3 lookVec = this.getLook(1.0F);
-		double dx = targetedEntity.posX - (this.posX + lookVec.xCoord * offset);
-		double dy = targetedEntity.boundingBox.minY + (double) (targetedEntity.height / 2.0F) - (0.5D + this.posY + (double) (this.height / 2.0F));
-		double dz = targetedEntity.posZ - (this.posZ + lookVec.zCoord * offset);
+		double dx = this.targetedEntity.posX - (this.posX + lookVec.xCoord * offset);
+		double dy = this.targetedEntity.boundingBox.minY + this.targetedEntity.height / 2.0F - (0.5D + this.posY + this.height / 2.0F);
+		double dz = this.targetedEntity.posZ - (this.posZ + lookVec.zCoord * offset);
 		this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1008, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
-		EntitySmallFireball fireball = new EntitySmallFireball(worldObj, this, dx, dy, dz);
+		EntitySmallFireball fireball = new EntitySmallFireball(this.worldObj, this, dx, dy, dz);
 		fireball.posX = this.posX + lookVec.xCoord * offset;
-		fireball.posY = this.posY + (double) (this.height / 2.0F) + 0.5D;
+		fireball.posY = this.posY + this.height / 2.0F + 0.5D;
 		fireball.posZ = this.posZ + lookVec.zCoord * offset;
 		fireball.accelerationX *= 1.5D;
 		fireball.accelerationY *= 1.5D;
 		fireball.accelerationZ *= 1.5D;
-		worldObj.spawnEntityInWorld(fireball);
+		this.worldObj.spawnEntityInWorld(fireball);
 		this.attackCounter = -40;
 	}
 
+	@Override
 	protected void dropFewItems(boolean player, int looting) {
 		this.dropItem(ModItems.blindGhastTear, 1);
 		super.dropFewItems(player, looting);
