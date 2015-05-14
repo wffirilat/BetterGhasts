@@ -1,8 +1,10 @@
 package wffirilat.betterghasts.proxy;
 
+import wffirilat.betterghasts.mobs.BlindGhast;
 import wffirilat.betterghasts.mobs.EntityPoisonFireball;
 import wffirilat.betterghasts.mobs.FlameGhast;
 import wffirilat.betterghasts.mobs.PoisonGhast;
+import wffirilat.betterghasts.mobs.RenderBlindGhast;
 import wffirilat.betterghasts.mobs.RenderFlameGhast;
 import wffirilat.betterghasts.mobs.RenderPoisonFireball;
 import wffirilat.betterghasts.mobs.RenderPoisonGhast;
@@ -16,6 +18,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(FlameGhast.class, new RenderFlameGhast());
 		RenderingRegistry.registerEntityRenderingHandler(PoisonGhast.class, new RenderPoisonGhast());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPoisonFireball.class, new RenderPoisonFireball(1.0f));
+		RenderingRegistry.registerEntityRenderingHandler(BlindGhast.class, new RenderBlindGhast());
 	}
 
 }

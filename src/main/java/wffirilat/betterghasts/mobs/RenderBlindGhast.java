@@ -6,8 +6,8 @@ import net.minecraft.util.ResourceLocation;
 import wffirilat.betterghasts.lib.Constants;
 
 public class RenderBlindGhast extends RenderGhast {
-	private static final ResourceLocation ghastTextures = new ResourceLocation(Constants.MODID + ":" + "textures/models/flameGhast.png");
-	private static final ResourceLocation ghastShootingTextures = new ResourceLocation(Constants.MODID + ":" + "textures/models/flameGhast_shooting.png");
+	private static final ResourceLocation ghastTextures = new ResourceLocation(Constants.MODID + ":" + "textures/models/blindGhast.png");
+	private static final ResourceLocation ghastShootingTextures = new ResourceLocation(Constants.MODID + ":" + "textures/models/blindGhast_shooting.png");
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityGhast p_110775_1_) {
