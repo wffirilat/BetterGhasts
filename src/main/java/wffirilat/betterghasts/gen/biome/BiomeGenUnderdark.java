@@ -11,19 +11,16 @@ import wffirilat.betterghasts.mobs.BlazeGhast;
 import wffirilat.betterghasts.mobs.CreepyGhast;
 import wffirilat.betterghasts.mobs.FlameGhast;
 
-public class BiomeGenVolcano extends BiomeGenBase {
+public class BiomeGenUnderdark extends BiomeGenBase {
 
-	public BiomeGenVolcano(int id) {
+	public BiomeGenUnderdark(int id) {
 		super(id);
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(FlameGhast.class, 40, 1, 1));
 		this.spawnableMonsterList.add(new SpawnListEntry(BlazeGhast.class, 40, 1, 1));
 		this.spawnableMonsterList.add(new SpawnListEntry(CreepyGhast.class, 40, 1, 1));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityGhast.class, 400, 2, 10));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityMagmaCube.class, 100, 2, 10));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityBlaze.class, 100, 2, 10));
 		this.spawnableCreatureList.clear();
-		this.theBiomeDecorator = new BiomeDecoratorVolcano();
 		this.topBlock = ModBlocks.ash;
 		this.fillerBlock = ModBlocks.basalt;
 		this.rootHeight = 0.3f;

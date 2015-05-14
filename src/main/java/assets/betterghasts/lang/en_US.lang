@@ -7,8 +7,12 @@ tile.betterghasts_geyser.name=Geyser
 tile.betterghasts_lavaGeyser.name=Lava Geyser
 
 item.betterghasts_flameGhastTear.name=Flame Ghast Tear
+item.betterghasts_blindGhastTear.name=Blind Ghast Tear
+
+item.betterghasts_EssenceBlind.name=Essence of Blindness
 
 entity.flameGhast.name=Flame Ghast
+entity.blindGhast.name=Blind Ghast
 
 generator.Better Ghasts=Better Ghasts
 

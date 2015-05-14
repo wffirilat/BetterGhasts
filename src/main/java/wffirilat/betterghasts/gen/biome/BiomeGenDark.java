@@ -1,12 +1,9 @@
 package wffirilat.betterghasts.gen.biome;
 
+import net.minecraft.world.biome.BiomeGenJungle;
 import wffirilat.betterghasts.blocks.ModBlocks;
 import wffirilat.betterghasts.mobs.BlindGhast;
-import wffirilat.betterghasts.mobs.FlameGhast;
-import wffirilat.betterghasts.mobs.PoisonGhast;
 import wffirilat.betterghasts.mobs.VoidGhast;
-import net.minecraft.world.biome.BiomeGenJungle;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 
 public class BiomeGenDark extends BiomeGenJungle {
 

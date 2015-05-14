@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import wffirilat.betterghasts.gen.WorldGenGeyser;
 import wffirilat.betterghasts.gen.WorldGenSpikes;
 
-public class BiomeDecoratorVolcano extends BiomeDecorator {
+public class BiomeDecoratorUnderdark extends BiomeDecorator {
 
 	public int obsidianSpikes;
 	public WorldGenerator spikeGen;
@@ -17,7 +17,7 @@ public class BiomeDecoratorVolcano extends BiomeDecorator {
 	public WorldGenerator lakeGen;
 	public int chunksPerLake;
 
-	public BiomeDecoratorVolcano() {
+	public BiomeDecoratorUnderdark() {
 		super();
 		this.obsidianSpikes = 1;
 		this.generateLakes = false;

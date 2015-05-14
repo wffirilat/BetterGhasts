@@ -3,7 +3,7 @@ package wffirilat.betterghasts.items;
 import net.minecraft.item.Item;
 
 public class ModItems {
-	
+
 	public static Item flameGhastTear;
 	public static Item poisonFireball;
 	public static Item blazeGhastTear;
@@ -19,7 +19,7 @@ public class ModItems {
 	public static Item EssenceFlame;
 
 	public static void init() {
-		
+
 		flameGhastTear = new ModItemBase("flameGhastTear");
 		blazeGhastTear = new ModItemBase("blazeGhastTear");
 		blindGhastTear = new ModItemBase("blindGhastTear");
@@ -33,12 +33,12 @@ public class ModItems {
 		EssenceBlind = new ModItemBase("EssenceBlind");
 		EssenceFlame = new ModItemBase("EssenceFlame");
 		EssenceBlaze = new ModItemBase("EssenceBlaze");
-		//TODO 2- more ghast tears
-		
-		//TODO 6- wet suit
-		//TODO 7- flippers
-		//TODO 8- goggles
-		
+		// TODO 2- more ghast tears
+
+		// TODO 6- wet suit
+		// TODO 7- flippers
+		// TODO 8- goggles
+
 	}
 
 }

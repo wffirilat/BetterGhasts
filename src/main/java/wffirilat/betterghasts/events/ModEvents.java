@@ -29,52 +29,51 @@ public class ModEvents {
 
 	/*
 	 * FORMAT
-	 * 
+	 *
 	 * @SubscribeEvent public void whatEver(<EventType> event) { doSomething; }
 	 */
 
 	@SubscribeEvent
 	public void ghastTears(AnvilUpdateEvent event) {
+		// is it possible to make it free? cost = 0 doesn't work
 		if (event.right.getItem() == ModItems.EssenceFlame) {
 			ItemStack i = event.left.copy();
 			i.addEnchantment(Enchantment.fireAspect, 5);
 			event.output = i;
 			event.cost = 1;
-		}// is it possible to make it free? cost = 0 doesn't work
-		else if (event.right.getItem() == ModItems.EssenceBlaze) {
+		} else if (event.right.getItem() == ModItems.EssenceBlaze) {
 			ItemStack i = event.left.copy();
 			i.addEnchantment(Enchantment.fireAspect, 2);
 			i.addEnchantment(Enchantment.smite, 2);
 			event.output = i;
-			event.cost = 1; // is it possible to make it free? cost = 0 doesn't
-							// work
 		} else if (event.right.getItem() == ModItems.EssenceVoid) {
 			ItemStack i = event.left.copy();
 			i.addEnchantment(Enchantment.sharpness, 6);
 			event.output = i;
-			event.cost = 1; // is it possible to make it free? cost = 0 doesn't
-							// work
+			event.cost = 1;
 		} else if (event.right.getItem() == ModItems.EssenceCreepy) {
 			ItemStack i = event.left.copy();
 			i.addEnchantment(Enchantment.knockback, 5);
 			event.output = i;
-			event.cost = 1; // is it possible to make it free? cost = 0 doesn't
-							// work
+			event.cost = 1;
 		}
 
 		// TODO 2- more ghast tear enchantment
 		// TODO Poison, blind,
 
 	}
-	
+
 	@SubscribeEvent
 	public void handlePotionEnchant(AttackEntityEvent event) {
+		System.out.println("recieved event");
 		ItemStack item = event.entityPlayer.getItemInUse();
-		int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.slowEnchant.effectId, item);
-		if(level != 0 && event.target instanceof EntityLivingBase) {
-			System.out.println("Slowing down");
-			((EntityLivingBase)event.target).addPotionEffect(new PotionEffect(ModEnchantments.slowEnchant.potionId, 50, level - 1));
-			
+		if (item != null) {
+			int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.slowEnchant.effectId, item);
+			if (level != 0 && event.target instanceof EntityLivingBase) {
+				System.out.println("Slowing down");
+				((EntityLivingBase) event.target).addPotionEffect(new PotionEffect(ModEnchantments.slowEnchant.potionId, 50, level - 1));
+
+			}
 		}
 	}
 }
