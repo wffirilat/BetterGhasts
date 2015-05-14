@@ -27,7 +27,6 @@ public class ModBlocks {
 		lavaGeyser = new BlockGeyser(Blocks.lava, "lavaGeyser").setHardness(1.5f).setResistance(15.0f);
 		
 		//TODO 3- speed boost air
-		//TODO 2- entity.stepHeight air?
 
 	}
 
