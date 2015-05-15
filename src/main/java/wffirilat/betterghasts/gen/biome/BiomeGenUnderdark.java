@@ -2,9 +2,7 @@ package wffirilat.betterghasts.gen.biome;
 
 import java.awt.Color;
 
-import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.world.biome.BiomeGenBase;
 import wffirilat.betterghasts.blocks.ModBlocks;
 import wffirilat.betterghasts.mobs.BlazeGhast;

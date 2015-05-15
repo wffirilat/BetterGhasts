@@ -29,7 +29,7 @@ public class ModEvents {
 
 	/*
 	 * FORMAT
-	 *
+	 * 
 	 * @SubscribeEvent public void whatEver(<EventType> event) { doSomething; }
 	 */
 

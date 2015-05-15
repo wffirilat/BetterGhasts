@@ -95,9 +95,9 @@ public class BlindGhast extends EntityGhast {
 
 				if (this.attackCounter == 20) {
 					if (this.targetedEntity instanceof EntityLivingBase) { // &&
-																			// !((EntityLivingBase)
-																			// targetedEntity).isPotionActive(Potion.blindness))
-																			// {
+						// !((EntityLivingBase)
+						// targetedEntity).isPotionActive(Potion.blindness))
+						// {
 						((EntityLivingBase) this.targetedEntity).addPotionEffect(new PotionEffect(Potion.blindness.id, 60, 2));
 					}
 					this.shoot();

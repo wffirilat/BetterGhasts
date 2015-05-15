@@ -345,37 +345,37 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 			int l;
 			label56:
 
-				for (this.field_150862_g = 0; this.field_150862_g < 21; ++this.field_150862_g) {
-					i = this.coords.posY + this.field_150862_g;
+			for (this.field_150862_g = 0; this.field_150862_g < 21; ++this.field_150862_g) {
+				i = this.coords.posY + this.field_150862_g;
 
-					for (j = 0; j < this.field_150868_h; ++j) {
-						k = this.coords.posX + j * Direction.offsetX[BlockPortal.field_150001_a[this.dir][1]];
-						l = this.coords.posZ + j * Direction.offsetZ[BlockPortal.field_150001_a[this.dir][1]];
-						Block block = this.worldObj.getBlock(k, i, l);
+				for (j = 0; j < this.field_150868_h; ++j) {
+					k = this.coords.posX + j * Direction.offsetX[BlockPortal.field_150001_a[this.dir][1]];
+					l = this.coords.posZ + j * Direction.offsetZ[BlockPortal.field_150001_a[this.dir][1]];
+					Block block = this.worldObj.getBlock(k, i, l);
 
-						if (!this.func_150857_a(block)) {
+					if (!this.func_150857_a(block)) {
+						break label56;
+					}
+
+					if (block == ModBlocks.portal) {
+						++this.field_150864_e;
+					}
+
+					if (j == 0) {
+						block = this.worldObj.getBlock(k + Direction.offsetX[BlockPortal.field_150001_a[this.dir][0]], i, l + Direction.offsetZ[BlockPortal.field_150001_a[this.dir][0]]);
+
+						if (block != Blocks.stonebrick) {
 							break label56;
 						}
+					} else if (j == this.field_150868_h - 1) {
+						block = this.worldObj.getBlock(k + Direction.offsetX[BlockPortal.field_150001_a[this.dir][1]], i, l + Direction.offsetZ[BlockPortal.field_150001_a[this.dir][1]]);
 
-						if (block == ModBlocks.portal) {
-							++this.field_150864_e;
-						}
-
-						if (j == 0) {
-							block = this.worldObj.getBlock(k + Direction.offsetX[BlockPortal.field_150001_a[this.dir][0]], i, l + Direction.offsetZ[BlockPortal.field_150001_a[this.dir][0]]);
-
-							if (block != Blocks.stonebrick) {
-								break label56;
-							}
-						} else if (j == this.field_150868_h - 1) {
-							block = this.worldObj.getBlock(k + Direction.offsetX[BlockPortal.field_150001_a[this.dir][1]], i, l + Direction.offsetZ[BlockPortal.field_150001_a[this.dir][1]]);
-
-							if (block != Blocks.stonebrick) {
-								break label56;
-							}
+						if (block != Blocks.stonebrick) {
+							break label56;
 						}
 					}
 				}
+			}
 
 			for (i = 0; i < this.field_150868_h; ++i) {
 				j = this.coords.posX + i * Direction.offsetX[BlockPortal.field_150001_a[this.dir][1]];

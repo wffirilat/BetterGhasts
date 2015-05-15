@@ -18,7 +18,7 @@ public class WorldGenPoisonJet extends WorldGenerator {
 					y--;
 				}
 				if (y == 62 && world.getBlock(x + dx, y, z + dz) != Blocks.grass) {
-					return false;
+					continue;
 				}
 				if (dx == 0 && dz == 0) {
 					world.setBlock(x, y, z, ModBlocks.poisonJet);

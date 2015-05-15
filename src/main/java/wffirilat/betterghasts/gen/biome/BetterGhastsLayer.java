@@ -58,7 +58,7 @@ public class BetterGhastsLayer extends GenLayer {
 	 * based on the particular GenLayer subclass.
 	 */
 	@Override
-	 public int[] getInts(int p_75904_1_, int p_75904_2_, int p_75904_3_, int p_75904_4_) {
+	public int[] getInts(int p_75904_1_, int p_75904_2_, int p_75904_3_, int p_75904_4_) {
 		int[] aint = this.parent.getInts(p_75904_1_, p_75904_2_, p_75904_3_, p_75904_4_);
 		int[] aint1 = IntCache.getIntCache(p_75904_3_ * p_75904_4_);
 
@@ -67,39 +67,39 @@ public class BetterGhastsLayer extends GenLayer {
 				this.initChunkSeed(j1 + p_75904_1_, i1 + p_75904_2_);
 				int k1 = aint[j1 + i1 * p_75904_3_];
 				int l1 = (k1 & 3840) >> 8;
-				k1 &= -3841;
+			k1 &= -3841;
 
-				if (isBiomeOceanic(k1)) {
-					aint1[j1 + i1 * p_75904_3_] = k1;
-				} else if (k1 == BiomeGenBase.mushroomIsland.biomeID) {
-					aint1[j1 + i1 * p_75904_3_] = k1;
-				} else if (k1 == 1) {
-					if (l1 > 0) {
-						if (this.nextInt(3) == 0) {
-							aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.mesaPlateau.biomeID;
-						} else {
-							aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.mesaPlateau_F.biomeID;
-						}
+			if (isBiomeOceanic(k1)) {
+				aint1[j1 + i1 * p_75904_3_] = k1;
+			} else if (k1 == BiomeGenBase.mushroomIsland.biomeID) {
+				aint1[j1 + i1 * p_75904_3_] = k1;
+			} else if (k1 == 1) {
+				if (l1 > 0) {
+					if (this.nextInt(3) == 0) {
+						aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.mesaPlateau.biomeID;
 					} else {
-						aint1[j1 + i1 * p_75904_3_] = this.getWeightedBiomeEntry(BiomeManager.BiomeType.DESERT).biome.biomeID;
+						aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.mesaPlateau_F.biomeID;
 					}
-				} else if (k1 == 2) {
-					if (l1 > 0) {
-						aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.jungle.biomeID;
-					} else {
-						aint1[j1 + i1 * p_75904_3_] = this.getWeightedBiomeEntry(BiomeManager.BiomeType.WARM).biome.biomeID;
-					}
-				} else if (k1 == 3) {
-					if (l1 > 0) {
-						aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.megaTaiga.biomeID;
-					} else {
-						aint1[j1 + i1 * p_75904_3_] = this.getWeightedBiomeEntry(BiomeManager.BiomeType.COOL).biome.biomeID;
-					}
-				} else if (k1 == 4) {
-					aint1[j1 + i1 * p_75904_3_] = this.getWeightedBiomeEntry(BiomeManager.BiomeType.ICY).biome.biomeID;
 				} else {
-					aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.mushroomIsland.biomeID;
+					aint1[j1 + i1 * p_75904_3_] = this.getWeightedBiomeEntry(BiomeManager.BiomeType.DESERT).biome.biomeID;
 				}
+			} else if (k1 == 2) {
+				if (l1 > 0) {
+					aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.jungle.biomeID;
+				} else {
+					aint1[j1 + i1 * p_75904_3_] = this.getWeightedBiomeEntry(BiomeManager.BiomeType.WARM).biome.biomeID;
+				}
+			} else if (k1 == 3) {
+				if (l1 > 0) {
+					aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.megaTaiga.biomeID;
+				} else {
+					aint1[j1 + i1 * p_75904_3_] = this.getWeightedBiomeEntry(BiomeManager.BiomeType.COOL).biome.biomeID;
+				}
+			} else if (k1 == 4) {
+				aint1[j1 + i1 * p_75904_3_] = this.getWeightedBiomeEntry(BiomeManager.BiomeType.ICY).biome.biomeID;
+			} else {
+				aint1[j1 + i1 * p_75904_3_] = BiomeGenBase.mushroomIsland.biomeID;
+			}
 			}
 		}
 
