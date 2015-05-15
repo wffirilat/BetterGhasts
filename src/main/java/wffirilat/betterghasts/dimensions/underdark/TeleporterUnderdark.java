@@ -258,31 +258,77 @@ public class TeleporterUnderdark extends Teleporter {
 				d2 = k2 + 0.5D - p_85188_1_.posZ;
 				label274:
 
+				for (i3 = this.worldServerInstance.getActualHeight() - 1; i3 >= 0; --i3) {
+					if (this.worldServerInstance.isAirBlock(i2, i3, k2)) {
+						while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2)) {
+							--i3;
+						}
+
+						for (j3 = l1; j3 < l1 + 4; ++j3) {
+							k3 = j3 % 2;
+							l3 = 1 - k3;
+
+							if (j3 % 4 >= 2) {
+								k3 = -k3;
+								l3 = -l3;
+							}
+
+							for (i4 = 0; i4 < 3; ++i4) {
+								for (j4 = 0; j4 < 4; ++j4) {
+									for (k4 = -1; k4 < 4; ++k4) {
+										l4 = i2 + (j4 - 1) * k3 + i4 * l3;
+										i5 = i3 + k4;
+										int j5 = k2 + (j4 - 1) * l3 - i4 * k3;
+
+										if (k4 < 0 && !this.worldServerInstance.getBlock(l4, i5, j5).getMaterial().isSolid() || k4 >= 0 && !this.worldServerInstance.isAirBlock(l4, i5, j5)) {
+											continue label274;
+										}
+									}
+								}
+							}
+
+							d3 = i3 + 0.5D - p_85188_1_.posY;
+							d4 = d1 * d1 + d3 * d3 + d2 * d2;
+
+							if (d0 < 0.0D || d4 < d0) {
+								d0 = d4;
+								l = i2;
+								i1 = i3;
+								j1 = k2;
+								k1 = j3 % 4;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		if (d0 < 0.0D) {
+			for (i2 = i - b0; i2 <= i + b0; ++i2) {
+				d1 = i2 + 0.5D - p_85188_1_.posX;
+
+				for (k2 = k - b0; k2 <= k + b0; ++k2) {
+					d2 = k2 + 0.5D - p_85188_1_.posZ;
+					label222:
+
 					for (i3 = this.worldServerInstance.getActualHeight() - 1; i3 >= 0; --i3) {
 						if (this.worldServerInstance.isAirBlock(i2, i3, k2)) {
 							while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2)) {
 								--i3;
 							}
 
-							for (j3 = l1; j3 < l1 + 4; ++j3) {
+							for (j3 = l1; j3 < l1 + 2; ++j3) {
 								k3 = j3 % 2;
 								l3 = 1 - k3;
 
-								if (j3 % 4 >= 2) {
-									k3 = -k3;
-									l3 = -l3;
-								}
+								for (i4 = 0; i4 < 4; ++i4) {
+									for (j4 = -1; j4 < 4; ++j4) {
+										k4 = i2 + (i4 - 1) * k3;
+										l4 = i3 + j4;
+										i5 = k2 + (i4 - 1) * l3;
 
-								for (i4 = 0; i4 < 3; ++i4) {
-									for (j4 = 0; j4 < 4; ++j4) {
-										for (k4 = -1; k4 < 4; ++k4) {
-											l4 = i2 + (j4 - 1) * k3 + i4 * l3;
-											i5 = i3 + k4;
-											int j5 = k2 + (j4 - 1) * l3 - i4 * k3;
-
-											if (k4 < 0 && !this.worldServerInstance.getBlock(l4, i5, j5).getMaterial().isSolid() || k4 >= 0 && !this.worldServerInstance.isAirBlock(l4, i5, j5)) {
-												continue label274;
-											}
+										if (j4 < 0 && !this.worldServerInstance.getBlock(k4, l4, i5).getMaterial().isSolid() || j4 >= 0 && !this.worldServerInstance.isAirBlock(k4, l4, i5)) {
+											continue label222;
 										}
 									}
 								}
@@ -295,57 +341,11 @@ public class TeleporterUnderdark extends Teleporter {
 									l = i2;
 									i1 = i3;
 									j1 = k2;
-									k1 = j3 % 4;
+									k1 = j3 % 2;
 								}
 							}
 						}
 					}
-			}
-		}
-
-		if (d0 < 0.0D) {
-			for (i2 = i - b0; i2 <= i + b0; ++i2) {
-				d1 = i2 + 0.5D - p_85188_1_.posX;
-
-				for (k2 = k - b0; k2 <= k + b0; ++k2) {
-					d2 = k2 + 0.5D - p_85188_1_.posZ;
-					label222:
-
-						for (i3 = this.worldServerInstance.getActualHeight() - 1; i3 >= 0; --i3) {
-							if (this.worldServerInstance.isAirBlock(i2, i3, k2)) {
-								while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2)) {
-									--i3;
-								}
-
-								for (j3 = l1; j3 < l1 + 2; ++j3) {
-									k3 = j3 % 2;
-									l3 = 1 - k3;
-
-									for (i4 = 0; i4 < 4; ++i4) {
-										for (j4 = -1; j4 < 4; ++j4) {
-											k4 = i2 + (i4 - 1) * k3;
-											l4 = i3 + j4;
-											i5 = k2 + (i4 - 1) * l3;
-
-											if (j4 < 0 && !this.worldServerInstance.getBlock(k4, l4, i5).getMaterial().isSolid() || j4 >= 0 && !this.worldServerInstance.isAirBlock(k4, l4, i5)) {
-												continue label222;
-											}
-										}
-									}
-
-									d3 = i3 + 0.5D - p_85188_1_.posY;
-									d4 = d1 * d1 + d3 * d3 + d2 * d2;
-
-									if (d0 < 0.0D || d4 < d0) {
-										d0 = d4;
-										l = i2;
-										i1 = i3;
-										j1 = k2;
-										k1 = j3 % 2;
-									}
-								}
-							}
-						}
 				}
 			}
 		}

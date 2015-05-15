@@ -5,7 +5,7 @@ import net.minecraft.enchantment.EnumEnchantmentType;
 
 public class PotionEnchantment extends Enchantment {
 
-	public static int potionId;
+	public int potionId;
 
 	protected PotionEnchantment(int id, int rarity, int potionId) {
 		super(id, rarity, EnumEnchantmentType.weapon);

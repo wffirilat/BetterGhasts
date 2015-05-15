@@ -27,11 +27,11 @@ public class ModEvents {
 		MinecraftForge.ORE_GEN_BUS.register(oreGenEvents);
 	}
 
-	/*
-	 * FORMAT
-	 * 
-	 * @SubscribeEvent public void whatEver(<EventType> event) { doSomething; }
-	 */
+	// FORMAT
+	//
+	// @SubscribeEvent public void whatEver(<EventType> event) {
+	// <doSomething;>
+	// }
 
 	@SubscribeEvent
 	public void ghastTears(AnvilUpdateEvent event) {
@@ -58,8 +58,7 @@ public class ModEvents {
 			event.cost = 1;
 		}
 
-		// TODO 2- more ghast tear enchantment
-		// TODO Poison, blind,
+		// TODO 2- more ghast tear enchantments (Poison, blind, ...)
 
 	}
 

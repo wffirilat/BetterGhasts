@@ -33,7 +33,6 @@ public class ModBlocks {
 		shadow = new ModBlockBase("shadow").setHardness(1.5f).setResistance(15.0f);
 		shade = new ModBlockBase("shade").setHardness(2.5f).setResistance(30.0f);
 		// TODO 3- speed boost air
-		// TODO 2- entity.stepHeight air?
 
 	}
 
