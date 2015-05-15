@@ -95,7 +95,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 
 	public void generateBlockArray(int chunkX, int chunkZ, Block[] blocks) {
 		byte scale = 4;
-		byte lavaLevel = 32;
+		byte lavaLevel = 11;
 		int xSize = scale + 1;
 		byte ySize = 17;
 		int zSize = scale + 1;
@@ -123,23 +123,23 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 						for (int j1 = 0; j1 < 4; ++j1) {
 							int index = j1 + x1 * 4 << 11 | 0 + z1 * 4 << 7 | y1 * 8 + i1;
 							short short1 = 128;
-							double d15 = d10;
+							double stoneNoise = d10;
 							double d16 = (d11 - d10) / 4.0D;
 
-							for (int k2 = 0; k2 < 4; ++k2) {
+							for (int k1 = 0; k1 < 4; ++k1) {
 								Block block = null;
 
 								if (y1 * 8 + i1 < lavaLevel) {
 									block = Blocks.lava;
 								}
 
-								if (d15 > 0.0D) {
+								if (stoneNoise > 0.0D) {
 									block = Blocks.stone;
 								}
 
 								blocks[index] = block;
 								index += short1;
-								d15 += d16;
+								stoneNoise += d16;
 							}
 
 							d10 += d12;
@@ -297,11 +297,11 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 		this.noiseData3 = this.noiseGen2.generateNoiseOctaves(this.noiseData3, x, y, z, sizeX, sizeY, sizeZ, scaleXZ, scaleY, scaleXZ);
 		int k1 = 0;
 		int i = 0;
-		double[] adouble1 = new double[sizeY];
+		double[] yCosWave = new double[sizeY];
 		int y1;
 
 		for (y1 = 0; y1 < sizeY; ++y1) {
-			adouble1[y1] = Math.cos(y1 * Math.PI * 6.0D / sizeY) * 2.0D;
+			yCosWave[y1] = Math.cos(y1 * Math.PI * 6.0D / sizeY) * 2.0D;
 			double d2 = y1;
 
 			if (y1 > sizeY / 2) {
@@ -310,7 +310,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 
 			if (d2 < 4.0D) {
 				d2 = 4.0D - d2;
-				adouble1[y1] -= d2 * d2 * d2 * 10.0D;
+				yCosWave[y1] -= d2 * d2 * d2 * 10.0D;
 			}
 		}
 
@@ -352,10 +352,9 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 				d3 += 0.5D;
 				d5 = d5 * sizeY / 16.0D;
 				++i;
-
-				for (int j2 = 0; j2 < sizeY; ++j2) {
+				for (y1 = 0; y1 < sizeY; ++y1) {
 					double d6 = 0.0D;
-					double d7 = adouble1[j2];
+					double d7 = yCosWave[y1];
 					double d8 = this.noiseData2[k1] / 512.0D;
 					double d9 = this.noiseData3[k1] / 512.0D;
 					double d10 = (this.noiseData1[k1] / 10.0D + 1.0D) / 2.0D;
@@ -371,13 +370,13 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 					d6 -= d7;
 					double d11;
 
-					if (j2 > sizeY - 4) {
-						d11 = (j2 - (sizeY - 4)) / 3.0F;
+					if (y1 > sizeY - 4) {
+						d11 = (y1 - (sizeY - 4)) / 3.0F;
 						d6 = d6 * (1.0D - d11) + -10.0D * d11;
 					}
 
-					if (j2 < d4) {
-						d11 = (d4 - j2) / 4.0D;
+					if (y1 < d4) {
+						d11 = (d4 - y1) / 4.0D;
 
 						if (d11 < 0.0D) {
 							d11 = 0.0D;
