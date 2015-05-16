@@ -94,37 +94,37 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	}
 
 	public void generateBlockArray(int chunkX, int chunkZ, Block[] blocks) {
-		byte scale = 4;
+		byte chunkSize = 4;
 		byte lavaLevel = 11;
-		int xSize = scale + 1;
+		int xSize = chunkSize + 1;
 		byte ySize = 17;
-		int zSize = scale + 1;
-		this.noiseField = this.initializeNoiseField(this.noiseField, chunkX * scale, 0, chunkZ * scale, xSize, ySize, zSize);
+		int zSize = chunkSize + 1;
+		this.noiseField = this.initializeNoiseField(this.noiseField, chunkX * chunkSize, 0, chunkZ * chunkSize, xSize, ySize, zSize);
 
-		for (int x1 = 0; x1 < scale; ++x1) {
-			for (int z1 = 0; z1 < scale; ++z1) {
+		for (int x1 = 0; x1 < chunkSize; ++x1) {
+			for (int z1 = 0; z1 < chunkSize; ++z1) {
 				for (int y1 = 0; y1 < 16; ++y1) {
-					double d0 = 0.125D;
+					double yScale = 0.125D;
 					double ixyz = this.noiseField[((x1 + 0) * zSize + z1 + 0) * ySize + y1 + 0];
 					double ixyZ = this.noiseField[((x1 + 0) * zSize + z1 + 1) * ySize + y1 + 0];
 					double iXyz = this.noiseField[((x1 + 1) * zSize + z1 + 0) * ySize + y1 + 0];
 					double iXyZ = this.noiseField[((x1 + 1) * zSize + z1 + 1) * ySize + y1 + 0];
-					double ixYz = (this.noiseField[((x1 + 0) * zSize + z1 + 0) * ySize + y1 + 1] - ixyz) * d0;
-					double ixYZ = (this.noiseField[((x1 + 0) * zSize + z1 + 1) * ySize + y1 + 1] - ixyZ) * d0;
-					double iXYz = (this.noiseField[((x1 + 1) * zSize + z1 + 0) * ySize + y1 + 1] - iXyz) * d0;
-					double iXYZ = (this.noiseField[((x1 + 1) * zSize + z1 + 1) * ySize + y1 + 1] - iXyZ) * d0;
+					double ixYz = (this.noiseField[((x1 + 0) * zSize + z1 + 0) * ySize + y1 + 1] - ixyz) * yScale;
+					double ixYZ = (this.noiseField[((x1 + 0) * zSize + z1 + 1) * ySize + y1 + 1] - ixyZ) * yScale;
+					double iXYz = (this.noiseField[((x1 + 1) * zSize + z1 + 0) * ySize + y1 + 1] - iXyz) * yScale;
+					double iXYZ = (this.noiseField[((x1 + 1) * zSize + z1 + 1) * ySize + y1 + 1] - iXyZ) * yScale;
 
 					for (int i1 = 0; i1 < 8; ++i1) {
-						double d10 = ixyz;
-						double d11 = ixyZ;
-						double d12 = (iXyz - ixyz) / 4.0D;
-						double d13 = (iXyZ - ixyZ) / 4.0D;
+						double dxz = ixyz;
+						double dxZ = ixyZ;
+						double xChange = (iXyz - ixyz) / 4.0D;
+						double zChange = (iXyZ - ixyZ) / 4.0D;
 
 						for (int j1 = 0; j1 < 4; ++j1) {
 							int index = j1 + x1 * 4 << 11 | 0 + z1 * 4 << 7 | y1 * 8 + i1;
 							short short1 = 128;
-							double stoneNoise = d10;
-							double d16 = (d11 - d10) / 4.0D;
+							double stoneNoise = dxz;
+							double d16 = (dxZ - dxz) / 4.0D;
 
 							for (int k1 = 0; k1 < 4; ++k1) {
 								Block block = null;
@@ -142,8 +142,8 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 								stoneNoise += d16;
 							}
 
-							d10 += d12;
-							d11 += d13;
+							dxz += xChange;
+							dxZ += zChange;
 						}
 
 						ixyz += ixYz;
@@ -295,7 +295,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 		this.noiseData1 = this.noiseGen3.generateNoiseOctaves(this.noiseData1, x, y, z, sizeX, sizeY, sizeZ, scaleXZ / 80.0D, scaleY / 60.0D, scaleXZ / 80.0D);
 		this.noiseData2 = this.noiseGen1.generateNoiseOctaves(this.noiseData2, x, y, z, sizeX, sizeY, sizeZ, scaleXZ, scaleY, scaleXZ);
 		this.noiseData3 = this.noiseGen2.generateNoiseOctaves(this.noiseData3, x, y, z, sizeX, sizeY, sizeZ, scaleXZ, scaleY, scaleXZ);
-		int k1 = 0;
+		int index = 0;
 		int i = 0;
 		double[] yCosWave = new double[sizeY];
 		int y1;
@@ -316,63 +316,63 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 
 		for (int x1 = 0; x1 < sizeX; ++x1) {
 			for (int z1 = 0; z1 < sizeZ; ++z1) {
-				double d3 = (this.noiseData4[i] + 256.0D) / 512.0D;
+				double noise4 = (this.noiseData4[i] + 256.0D) / 512.0D;
 
-				if (d3 > 1.0D) {
-					d3 = 1.0D;
+				if (noise4 > 1.0D) {
+					noise4 = 1.0D;
 				}
 
 				double d4 = 0.0D;
-				double d5 = this.noiseData5[i] / 8000.0D;
+				double noise5 = this.noiseData5[i] / 8000.0D;
 
-				if (d5 < 0.0D) {
-					d5 = -d5;
+				if (noise5 < 0.0D) {
+					noise5 = -noise5;
 				}
 
-				d5 = d5 * 3.0D - 3.0D;
+				noise5 = noise5 * 3.0D - 3.0D;
 
-				if (d5 < 0.0D) {
-					d5 /= 2.0D;
+				if (noise5 < 0.0D) {
+					noise5 /= 2.0D;
 
-					if (d5 < -1.0D) {
-						d5 = -1.0D;
+					if (noise5 < -1.0D) {
+						noise5 = -1.0D;
 					}
 
-					d5 /= 1.4D;
-					d5 /= 2.0D;
-					d3 = 0.0D;
+					noise5 /= 1.4D;
+					noise5 /= 2.0D;
+					noise4 = 0.0D;
 				} else {
-					if (d5 > 1.0D) {
-						d5 = 1.0D;
+					if (noise5 > 1.0D) {
+						noise5 = 1.0D;
 					}
 
-					d5 /= 6.0D;
+					noise5 /= 6.0D;
 				}
 
-				d3 += 0.5D;
-				d5 = d5 * sizeY / 16.0D;
+				noise4 += 0.5D;
+				noise5 = noise5 * sizeY / 16.0D;
 				++i;
 				for (y1 = 0; y1 < sizeY; ++y1) {
-					double d6 = 0.0D;
-					double d7 = yCosWave[y1];
-					double d8 = this.noiseData2[k1] / 512.0D;
-					double d9 = this.noiseData3[k1] / 512.0D;
-					double d10 = (this.noiseData1[k1] / 10.0D + 1.0D) / 2.0D;
+					double val = 0.0D;
+					double cosY = yCosWave[y1];
+					double noise2 = this.noiseData2[index] / 512.0D;
+					double noise3 = this.noiseData3[index] / 512.0D;
+					double noise1 = (this.noiseData1[index] / 10.0D + 1.0D) / 2.0D;
 
-					if (d10 < 0.0D) {
-						d6 = d8;
-					} else if (d10 > 1.0D) {
-						d6 = d9;
+					if (noise1 < 0.0D) {
+						val = noise2;
+					} else if (noise1 > 1.0D) {
+						val = noise3;
 					} else {
-						d6 = d8 + (d9 - d8) * d10;
+						val = noise2 + (noise3 - noise2) * noise1;
 					}
 
-					d6 -= d7;
+					val -= cosY;
 					double d11;
 
 					if (y1 > sizeY - 4) {
 						d11 = (y1 - (sizeY - 4)) / 3.0F;
-						d6 = d6 * (1.0D - d11) + -10.0D * d11;
+						val = val * (1.0D - d11) + -10.0D * d11;
 					}
 
 					if (y1 < d4) {
@@ -386,11 +386,11 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 							d11 = 1.0D;
 						}
 
-						d6 = d6 * (1.0D - d11) + -10.0D * d11;
+						val = val * (1.0D - d11) + -10.0D * d11;
 					}
 
-					noisefield[k1] = d6;
-					++k1;
+					noisefield[index] = val;
+					++index;
 				}
 			}
 		}
@@ -427,7 +427,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * saved.
 	 */
 	@Override
-	public boolean saveChunks(boolean p_73151_1_, IProgressUpdate p_73151_2_) {
+	public boolean saveChunks(boolean all, IProgressUpdate progress) {
 		return true;
 	}
 
