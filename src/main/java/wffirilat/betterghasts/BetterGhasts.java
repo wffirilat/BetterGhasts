@@ -22,14 +22,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-//TODO Localize- UnderdarkPortal
-//TODO Localize- GhastRage
-//TODO Localize- Shadow
-//TODO Localize- Shade
-//TODO Localize- PoisonGhast
-//TODO Localize- CreepyGhast
-//TODO Localize- VoidGhast
-//TODO Localize- BlazeGhast
 //TODO Localize- EssenceCreepy
 //TODO Localize- EssenceFlame
 //TODO Localize- EssenceVoid
@@ -37,9 +29,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 //TODO Localize- EssencePoison
 //TODO Localize- CreepyGhastTear
 //TODO Localize- VoidGhastTear
-//TODO Localize- BlazeGhastTear
 //TODO Localize- PoisonGhastTear
-//TODO Localize- PoisonFireball
 //TODO Localize- SlowEnchant
 //TODO Texture- GhastRage
 //TODO Texture- Shade

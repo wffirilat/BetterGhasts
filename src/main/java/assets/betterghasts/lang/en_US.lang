@@ -5,14 +5,23 @@ tile.betterghasts_ash.name=Ash
 tile.betterghasts_basalt.name=Basalt
 tile.betterghasts_geyser.name=Geyser
 tile.betterghasts_lavaGeyser.name=Lava Geyser
-
-item.betterghasts_flameGhastTear.name=Flame Ghast Tear
-item.betterghasts_blindGhastTear.name=Blind Ghast Tear
+tile.betterghasts_underdarkPortal.name=Underdark Portal
+tile.betterghasts_ghastRage.name=Ghast Rage
+tile.betterghasts_shadow.name=Shadow
+tile.betterghasts_shade.name=Shade
 
 item.betterghasts_EssenceBlind.name=Essence of Blindness
+item.betterghasts_blazeGhastTear.name=Blaze Ghast Tear
+item.betterghasts_flameGhastTear.name=Flame Ghast Tear
+item.betterghasts_blindGhastTear.name=Blind Ghast Tear
+item.betterghasts_poisonFireball.name=Poison Firebal
 
 entity.flameGhast.name=Flame Ghast
 entity.blindGhast.name=Blind Ghast
+entity.blazeGhast.name=Blaze Ghast
+entity.poisonGhast.name=Poison Ghast
+entity.voidGhast.name=Void Ghast
+entity.creepyGhast.name=Creepy Ghast
 
 generator.Better Ghasts=Better Ghasts
 
