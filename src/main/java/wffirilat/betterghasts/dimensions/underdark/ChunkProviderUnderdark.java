@@ -95,7 +95,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 
 	public void generateBlockArray(int chunkX, int chunkZ, Block[] blocks) {
 		byte scale = 4;
-		byte b1 = 32;
+		byte lavaLevel = 32;
 		int xSize = scale + 1;
 		byte ySize = 17;
 		int zSize = scale + 1;
@@ -105,33 +105,31 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 			for (int z1 = 0; z1 < scale; ++z1) {
 				for (int y1 = 0; y1 < 16; ++y1) {
 					double d0 = 0.125D;
-					double d1 = this.noiseField[((x1 + 0) * zSize + z1 + 0) * ySize + y1 + 0];
-					double d2 = this.noiseField[((x1 + 0) * zSize + z1 + 1) * ySize + y1 + 0];
-					double d3 = this.noiseField[((x1 + 1) * zSize + z1 + 0) * ySize + y1 + 0];
-					double d4 = this.noiseField[((x1 + 1) * zSize + z1 + 1) * ySize + y1 + 0];
-					double d5 = (this.noiseField[((x1 + 0) * zSize + z1 + 0) * ySize + y1 + 1] - d1) * d0;
-					double d6 = (this.noiseField[((x1 + 0) * zSize + z1 + 1) * ySize + y1 + 1] - d2) * d0;
-					double d7 = (this.noiseField[((x1 + 1) * zSize + z1 + 0) * ySize + y1 + 1] - d3) * d0;
-					double d8 = (this.noiseField[((x1 + 1) * zSize + z1 + 1) * ySize + y1 + 1] - d4) * d0;
+					double ixyz = this.noiseField[((x1 + 0) * zSize + z1 + 0) * ySize + y1 + 0];
+					double ixyZ = this.noiseField[((x1 + 0) * zSize + z1 + 1) * ySize + y1 + 0];
+					double iXyz = this.noiseField[((x1 + 1) * zSize + z1 + 0) * ySize + y1 + 0];
+					double iXyZ = this.noiseField[((x1 + 1) * zSize + z1 + 1) * ySize + y1 + 0];
+					double ixYz = (this.noiseField[((x1 + 0) * zSize + z1 + 0) * ySize + y1 + 1] - ixyz) * d0;
+					double ixYZ = (this.noiseField[((x1 + 0) * zSize + z1 + 1) * ySize + y1 + 1] - ixyZ) * d0;
+					double iXYz = (this.noiseField[((x1 + 1) * zSize + z1 + 0) * ySize + y1 + 1] - iXyz) * d0;
+					double iXYZ = (this.noiseField[((x1 + 1) * zSize + z1 + 1) * ySize + y1 + 1] - iXyZ) * d0;
 
 					for (int i1 = 0; i1 < 8; ++i1) {
-						double d9 = 0.25D;
-						double d10 = d1;
-						double d11 = d2;
-						double d12 = (d3 - d1) * d9;
-						double d13 = (d4 - d2) * d9;
+						double d10 = ixyz;
+						double d11 = ixyZ;
+						double d12 = (iXyz - ixyz) / 4.0D;
+						double d13 = (iXyZ - ixyZ) / 4.0D;
 
 						for (int j1 = 0; j1 < 4; ++j1) {
-							int j2 = j1 + x1 * 4 << 11 | 0 + z1 * 4 << 7 | y1 * 8 + i1;
+							int index = j1 + x1 * 4 << 11 | 0 + z1 * 4 << 7 | y1 * 8 + i1;
 							short short1 = 128;
-							double d14 = 0.25D;
 							double d15 = d10;
-							double d16 = (d11 - d10) * d14;
+							double d16 = (d11 - d10) / 4.0D;
 
 							for (int k2 = 0; k2 < 4; ++k2) {
 								Block block = null;
 
-								if (y1 * 8 + i1 < b1) {
+								if (y1 * 8 + i1 < lavaLevel) {
 									block = Blocks.lava;
 								}
 
@@ -139,8 +137,8 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 									block = Blocks.stone;
 								}
 
-								blocks[j2] = block;
-								j2 += short1;
+								blocks[index] = block;
+								index += short1;
 								d15 += d16;
 							}
 
@@ -148,10 +146,10 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 							d11 += d13;
 						}
 
-						d1 += d5;
-						d2 += d6;
-						d3 += d7;
-						d4 += d8;
+						ixyz += ixYz;
+						ixyZ += ixYZ;
+						iXyz += iXYz;
+						iXyZ += iXYZ;
 					}
 				}
 			}
@@ -256,7 +254,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	@Override
 	public Chunk provideChunk(int chunkX, int chunkZ) {
 		this.rand.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
-		Block[] blocks = new Block[32768];
+		Block[] blocks = new Block[16 * 16 * 128];
 		byte[] meta = new byte[blocks.length];
 		BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[]) null, chunkX * 16, chunkZ * 16, 16, 16);
 		// Forge Move up to allow for passing to replaceBiomeBlocks
@@ -290,13 +288,13 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 			noisefield = new double[sizeX * sizeY * sizeZ];
 		}
 
-		double d0 = 684.412D / 2D;
-		double d1 = 2053.236D / 2D;
+		double scaleXZ = 684.412D / 2D;
+		double scaleY = 2053.236D / 2D;
 		this.noiseData4 = this.noiseGen6.generateNoiseOctaves(this.noiseData4, x, y, z, sizeX, 1, sizeZ, 1.0D, 0.0D, 1.0D);
 		this.noiseData5 = this.noiseGen7.generateNoiseOctaves(this.noiseData5, x, y, z, sizeX, 1, sizeZ, 100.0D, 0.0D, 100.0D);
-		this.noiseData1 = this.noiseGen3.generateNoiseOctaves(this.noiseData1, x, y, z, sizeX, sizeY, sizeZ, d0 / 80.0D, d1 / 60.0D, d0 / 80.0D);
-		this.noiseData2 = this.noiseGen1.generateNoiseOctaves(this.noiseData2, x, y, z, sizeX, sizeY, sizeZ, d0, d1, d0);
-		this.noiseData3 = this.noiseGen2.generateNoiseOctaves(this.noiseData3, x, y, z, sizeX, sizeY, sizeZ, d0, d1, d0);
+		this.noiseData1 = this.noiseGen3.generateNoiseOctaves(this.noiseData1, x, y, z, sizeX, sizeY, sizeZ, scaleXZ / 80.0D, scaleY / 60.0D, scaleXZ / 80.0D);
+		this.noiseData2 = this.noiseGen1.generateNoiseOctaves(this.noiseData2, x, y, z, sizeX, sizeY, sizeZ, scaleXZ, scaleY, scaleXZ);
+		this.noiseData3 = this.noiseGen2.generateNoiseOctaves(this.noiseData3, x, y, z, sizeX, sizeY, sizeZ, scaleXZ, scaleY, scaleXZ);
 		int k1 = 0;
 		int i = 0;
 		double[] adouble1 = new double[sizeY];
