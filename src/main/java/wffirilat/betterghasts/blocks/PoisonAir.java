@@ -2,9 +2,7 @@ package wffirilat.betterghasts.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,23 +20,24 @@ public class PoisonAir extends BlockAir {
 	public PoisonAir() {
 
 		super();
-		
-		setBlockName(Constants.MODID + "_" + name);
-		setBlockTextureName(Constants.MODID + ":" + name);
-		setCreativeTab(CreativeTabs.tabBlock);
-		GameRegistry.registerBlock(this, name);
-		
+
+		this.setBlockName(Constants.MODID + "_" + this.name);
+		this.setBlockTextureName(Constants.MODID + ":" + this.name);
+		this.setCreativeTab(CreativeTabs.tabBlock);
+		GameRegistry.registerBlock(this, this.name);
+
 		this.needsRandomTick = true;
 
 	}
-	
+
 	@Override
-	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e){
-		if(e instanceof EntityLivingBase && !((EntityLivingBase) e).isPotionActive(Potion.poison)){
+	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
+		if (e instanceof EntityLivingBase && !((EntityLivingBase) e).isPotionActive(Potion.poison)) {
 			((EntityLivingBase) e).addPotionEffect(new PotionEffect(Potion.poison.id, 20, 1));
 		}
 	}
-	
+
+	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		world.setBlock(x, y, z, Blocks.air);
 	}

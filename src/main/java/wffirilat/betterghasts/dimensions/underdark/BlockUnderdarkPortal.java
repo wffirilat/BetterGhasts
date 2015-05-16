@@ -29,22 +29,23 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 	protected BlockUnderdarkPortal(String name, Material material, boolean p_i45411_3_) {
 		super(name, material, p_i45411_3_);
 	}
-	
+
 	public static String name = "underdarkPortal";
 	public static final int[][] directions = new int[][] { new int[0], { 3, 1 }, { 2, 0 } };
 
 	public BlockUnderdarkPortal() {
 		super(Constants.MODID + ":" + name, Material.portal, false);
 		this.setTickRandomly(true);
-		setBlockName(Constants.MODID + "_" + name);
-		setBlockTextureName(Constants.MODID + ":" + name);
-		setCreativeTab(CreativeTabs.tabBlock);
+		this.setBlockName(Constants.MODID + "_" + name);
+		this.setBlockTextureName(Constants.MODID + ":" + name);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 		GameRegistry.registerBlock(this, name);
 	}
 
 	/**
 	 * Ticks the block if it's been scheduled
 	 */
+	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		super.updateTick(world, x, y, z, rand);
 
@@ -56,7 +57,7 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 			}
 
 			if (l > 0 && !world.getBlock(x, l + 1, z).isNormalCube()) {
-				Entity entity = ItemMonsterPlacer.spawnCreature(world, 57, (double) x + 0.5D, (double) l + 1.1D, (double) z + 0.5D);
+				Entity entity = ItemMonsterPlacer.spawnCreature(world, 57, x + 0.5D, l + 1.1D, z + 0.5D);
 
 				if (entity != null) {
 					entity.timeUntilPortal = entity.getPortalCooldown();
@@ -69,6 +70,7 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 	 * Returns a bounding box from the pool of bounding boxes (this means this
 	 * box can change after the pool has been cleared to be reused)
 	 */
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
 		return null;
 	}
@@ -77,6 +79,7 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 	 * Updates the blocks bounds based on its current state. Args: world, x, y,
 	 * z
 	 */
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
 		int l = getPortalDirection(world.getBlockMetadata(x, y, z));
 
@@ -110,6 +113,7 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 	 * If this block doesn't render as an ordinary block it will return False
 	 * (examples: signs, buttons, stairs, etc)
 	 */
+	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
@@ -134,6 +138,7 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 	 * neighbor changed (coordinates passed are their own) Args: x, y, z,
 	 * neighbor Block
 	 */
+	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbor) {
 		int dir = getPortalDirection(world.getBlockMetadata(x, y, z));
 		BlockUnderdarkPortal.Size size = new BlockUnderdarkPortal.Size(world, x, y, z, 1);
@@ -153,6 +158,7 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 	 * the adjacent block is at the given coordinates. Args: blockAccess, x, y,
 	 * z, side
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
 		int dir = 0;
@@ -179,12 +185,13 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 		boolean flag3 = world.getBlock(x, y, z + 1) == this && world.getBlock(x, y, z + 2) != this;
 		boolean flag4 = flag || flag1 || dir == 1;
 		boolean flag5 = flag2 || flag3 || dir == 2;
-		return flag4 && side == 4 ? true : (flag4 && side == 5 ? true : (flag5 && side == 2 ? true : flag5 && side == 3));
+		return flag4 && side == 4 ? true : flag4 && side == 5 ? true : flag5 && side == 2 ? true : flag5 && side == 3;
 	}
 
 	/**
 	 * Returns the quantity of items to drop on block destruction.
 	 */
+	@Override
 	public int quantityDropped(Random rand) {
 		return 0;
 	}
@@ -193,32 +200,29 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 	 * Triggered whenever an entity collides with this block (enters into the
 	 * block). Args: world, x, y, z, entity
 	 */
+	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-		if ((entity.ridingEntity == null) && (entity.riddenByEntity == null) && ((entity instanceof EntityPlayerMP)))
-        {
-            EntityPlayerMP thePlayer = (EntityPlayerMP)entity;
-            if (thePlayer.timeUntilPortal > 0)
-            {
-                thePlayer.timeUntilPortal = 10;
-            }
-            else if (thePlayer.dimension != ModDimensions.underdarkId)
-            {
-                thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, ModDimensions.underdarkId, new TeleporterUnderdark(thePlayer.mcServer.worldServerForDimension(ModDimensions.underdarkId)));
-            }
-            
-            else if (thePlayer.dimension == ModDimensions.underdarkId)
-            {
-                thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new TeleporterUnderdark(thePlayer.mcServer.worldServerForDimension(0)));
-            }
-        }
+		if (entity.ridingEntity == null && entity.riddenByEntity == null && entity instanceof EntityPlayerMP) {
+			EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
+			if (thePlayer.timeUntilPortal > 0) {
+				thePlayer.timeUntilPortal = 10;
+			} else if (thePlayer.dimension != ModDimensions.underdarkId) {
+				thePlayer.timeUntilPortal = 10;
+				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, ModDimensions.underdarkId, new TeleporterUnderdark(thePlayer.mcServer.worldServerForDimension(ModDimensions.underdarkId)));
+			}
+
+			else if (thePlayer.dimension == ModDimensions.underdarkId) {
+				thePlayer.timeUntilPortal = 10;
+				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new TeleporterUnderdark(thePlayer.mcServer.worldServerForDimension(0)));
+			}
+		}
 	}
 
 	/**
 	 * Returns which pass should this block be rendered on. 0 for solids and 1
 	 * for alpha
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderBlockPass() {
 		return 1;
@@ -228,30 +232,31 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 	 * A randomly called display update to be able to add particles or other
 	 * items for display
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		if (rand.nextInt(100) == 0) {
-			world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "portal.portal", 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+			world.playSound(x + 0.5D, y + 0.5D, z + 0.5D, "portal.portal", 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
 		}
 
 		for (int l = 0; l < 4; ++l) {
-			double d0 = (double) ((float) x + rand.nextFloat());
-			double d1 = (double) ((float) y + rand.nextFloat());
-			double d2 = (double) ((float) z + rand.nextFloat());
+			double d0 = x + rand.nextFloat();
+			double d1 = y + rand.nextFloat();
+			double d2 = z + rand.nextFloat();
 			double d3 = 0.0D;
 			double d4 = 0.0D;
 			double d5 = 0.0D;
 			int i1 = rand.nextInt(2) * 2 - 1;
-			d3 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
-			d4 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
-			d5 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+			d3 = (rand.nextFloat() - 0.5D) * 0.5D;
+			d4 = (rand.nextFloat() - 0.5D) * 0.5D;
+			d5 = (rand.nextFloat() - 0.5D) * 0.5D;
 
 			if (world.getBlock(x - 1, y, z) != this && world.getBlock(x + 1, y, z) != this) {
-				d0 = (double) x + 0.5D + 0.25D * (double) i1;
-				d3 = (double) (rand.nextFloat() * 2.0F * (float) i1);
+				d0 = x + 0.5D + 0.25D * i1;
+				d3 = rand.nextFloat() * 2.0F * i1;
 			} else {
-				d2 = (double) z + 0.5D + 0.25D * (double) i1;
-				d5 = (double) (rand.nextFloat() * 2.0F * (float) i1);
+				d2 = z + 0.5D + 0.25D * i1;
+				d5 = rand.nextFloat() * 2.0F * i1;
 			}
 
 			world.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
@@ -265,6 +270,7 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 	/**
 	 * Gets an item for the block being called on. Args: world, x, y, z
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
 		return Item.getItemById(0);

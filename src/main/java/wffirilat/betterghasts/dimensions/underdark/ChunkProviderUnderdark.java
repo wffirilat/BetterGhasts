@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -68,8 +67,8 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	private static final String __OBFID = "CL_00000392";
 
 	{
-		genNetherBridge = (MapGenNetherBridge) TerrainGen.getModdedMapGen(genNetherBridge, NETHER_BRIDGE);
-		netherCaveGenerator = TerrainGen.getModdedMapGen(netherCaveGenerator, NETHER_CAVE);
+		this.genNetherBridge = (MapGenNetherBridge) TerrainGen.getModdedMapGen(this.genNetherBridge, NETHER_BRIDGE);
+		this.netherCaveGenerator = TerrainGen.getModdedMapGen(this.netherCaveGenerator, NETHER_CAVE);
 	}
 
 	public ChunkProviderUnderdark(World world, long seed) {
@@ -83,7 +82,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 		this.noiseGen6 = new NoiseGeneratorOctaves(this.rand, 10);
 		this.noiseGen7 = new NoiseGeneratorOctaves(this.rand, 16);
 
-		NoiseGenerator[] noiseGens = { noiseGen1, noiseGen2, noiseGen3, slowsandGravelNoiseGen, netherrackExculsivityNoiseGen, noiseGen6, noiseGen7 };
+		NoiseGenerator[] noiseGens = { this.noiseGen1, this.noiseGen2, this.noiseGen3, this.slowsandGravelNoiseGen, this.netherrackExculsivityNoiseGen, this.noiseGen6, this.noiseGen7 };
 		noiseGens = TerrainGen.getModdedNoiseGenerators(world, this.rand, noiseGens);
 		this.noiseGen1 = (NoiseGeneratorOctaves) noiseGens[0];
 		this.noiseGen2 = (NoiseGeneratorOctaves) noiseGens[1];
@@ -162,14 +161,15 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	@Deprecated
 	// You should provide metadata and biome data in the below method
 	public void func_147418_b(int chunkX, int chunkZ, Block[] blocks) {
-		replaceBiomeBlocks(chunkX, chunkZ, blocks, new byte[blocks.length], null);
+		this.replaceBiomeBlocks(chunkX, chunkZ, blocks, new byte[blocks.length], null);
 	}
 
 	public void replaceBiomeBlocks(int chunkX, int chunkZ, Block[] blocks, byte[] meta, BiomeGenBase[] biomes) {
 		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, chunkX, chunkZ, blocks, meta, biomes, this.worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == Result.DENY)
+		if (event.getResult() == Result.DENY) {
 			return;
+		}
 
 		byte b0 = 64;
 		double d0 = 0.03125D;
@@ -243,6 +243,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	/**
 	 * loads or generates the chunk at the chunk location specified
 	 */
+	@Override
 	public Chunk loadChunk(int chunkX, int chunkZ) {
 		return this.provideChunk(chunkX, chunkZ);
 	}
@@ -252,8 +253,9 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * will generates all the blocks for the specified chunk from the map seed
 	 * and chunk seed
 	 */
+	@Override
 	public Chunk provideChunk(int chunkX, int chunkZ) {
-		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
+		this.rand.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 		Block[] blocks = new Block[32768];
 		byte[] meta = new byte[blocks.length];
 		BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[]) null, chunkX * 16, chunkZ * 16, 16, 16);
@@ -280,8 +282,9 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	private double[] initializeNoiseField(double[] noisefield, int x, int y, int z, int sizeX, int sizeY, int sizeZ) {
 		ChunkProviderEvent.InitNoiseField event = new ChunkProviderEvent.InitNoiseField(this, noisefield, x, y, z, sizeX, sizeY, sizeZ);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == Result.DENY)
+		if (event.getResult() == Result.DENY) {
 			return event.noisefield;
+		}
 
 		if (noisefield == null) {
 			noisefield = new double[sizeX * sizeY * sizeZ];
@@ -300,11 +303,11 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 		int y1;
 
 		for (y1 = 0; y1 < sizeY; ++y1) {
-			adouble1[y1] = Math.cos((double) y1 * Math.PI * 6.0D / (double) sizeY) * 2.0D;
-			double d2 = (double) y1;
+			adouble1[y1] = Math.cos(y1 * Math.PI * 6.0D / sizeY) * 2.0D;
+			double d2 = y1;
 
 			if (y1 > sizeY / 2) {
-				d2 = (double) (sizeY - 1 - y1);
+				d2 = sizeY - 1 - y1;
 			}
 
 			if (d2 < 4.0D) {
@@ -349,7 +352,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 				}
 
 				d3 += 0.5D;
-				d5 = d5 * (double) sizeY / 16.0D;
+				d5 = d5 * sizeY / 16.0D;
 				++i;
 
 				for (int j2 = 0; j2 < sizeY; ++j2) {
@@ -371,12 +374,12 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 					double d11;
 
 					if (j2 > sizeY - 4) {
-						d11 = (double) ((float) (j2 - (sizeY - 4)) / 3.0F);
+						d11 = (j2 - (sizeY - 4)) / 3.0F;
 						d6 = d6 * (1.0D - d11) + -10.0D * d11;
 					}
 
-					if ((double) j2 < d4) {
-						d11 = (d4 - (double) j2) / 4.0D;
+					if (j2 < d4) {
+						d11 = (d4 - j2) / 4.0D;
 
 						if (d11 < 0.0D) {
 							d11 = 0.0D;
@@ -401,6 +404,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	/**
 	 * Checks to see if a chunk exists at x, y
 	 */
+	@Override
 	public boolean chunkExists(int chunkX, int chunkZ) {
 		return true;
 	}
@@ -408,14 +412,15 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	/**
 	 * Populates chunk with ores etc etc
 	 */
+	@Override
 	public void populate(IChunkProvider p_73153_1_, int chunkX, int chunkZ) {
 
 		int x = chunkX * 16;
 		int z = chunkZ * 16;
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(p_73153_1_, worldObj, rand, chunkX, chunkZ, false));
-		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(worldObj, rand, x, z));
-		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(worldObj, rand, x, z));
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(p_73153_1_, worldObj, rand, chunkX, chunkZ, false));
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(p_73153_1_, this.worldObj, this.rand, chunkX, chunkZ, false));
+		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(this.worldObj, this.rand, x, z));
+		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(this.worldObj, this.rand, x, z));
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(p_73153_1_, this.worldObj, this.rand, chunkX, chunkZ, false));
 
 	}
 
@@ -424,6 +429,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * passed false, save up to two chunks. Return true if all chunks have been
 	 * saved.
 	 */
+	@Override
 	public boolean saveChunks(boolean p_73151_1_, IProgressUpdate p_73151_2_) {
 		return true;
 	}
@@ -432,6 +438,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * Save extra data not associated with any Chunk. Not saved during autosave,
 	 * only during world unload. Currently unimplemented.
 	 */
+	@Override
 	public void saveExtraData() {
 	}
 
@@ -439,6 +446,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * Unloads chunks that are marked to be unloaded. This is not guaranteed to
 	 * unload every such chunk.
 	 */
+	@Override
 	public boolean unloadQueuedChunks() {
 		return false;
 	}
@@ -446,6 +454,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	/**
 	 * Returns if the IChunkProvider supports saving.
 	 */
+	@Override
 	public boolean canSave() {
 		return true;
 	}
@@ -453,6 +462,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	/**
 	 * Converts the instance data to a readable string.
 	 */
+	@Override
 	public String makeString() {
 		return "RandomLevelSource";
 	}
@@ -461,6 +471,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * Returns a list of creatures of the specified type that can spawn at the
 	 * given location.
 	 */
+	@Override
 	public List getPossibleCreatures(EnumCreatureType type, int x, int y, int z) {
 		if (type == EnumCreatureType.monster) {
 			if (this.genNetherBridge.hasStructureAt(x, y, z)) {
@@ -476,14 +487,17 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 		return biomegenbase.getSpawnableList(type);
 	}
 
+	@Override
 	public ChunkPosition func_147416_a(World world, String name, int x, int y, int z) {
 		return null;
 	}
 
+	@Override
 	public int getLoadedChunkCount() {
 		return 0;
 	}
 
+	@Override
 	public void recreateStructures(int chunkX, int chunkZ) {
 		this.genNetherBridge.func_151539_a(this, this.worldObj, chunkX, chunkZ, (Block[]) null);
 	}

@@ -1,7 +1,6 @@
 package wffirilat.betterghasts;
 
 import net.minecraft.world.WorldType;
-
 import wffirilat.betterghasts.blocks.ModBlocks;
 import wffirilat.betterghasts.dimensions.ModDimensions;
 import wffirilat.betterghasts.events.ModEvents;
@@ -10,8 +9,6 @@ import wffirilat.betterghasts.gen.ModOreGenerators;
 import wffirilat.betterghasts.gen.biome.ModBiomes;
 import wffirilat.betterghasts.gen.biome.WorldTypeBetterGhasts;
 import wffirilat.betterghasts.items.ModItems;
-import wffirilat.betterghasts.lib.Constants;
-import wffirilat.betterghasts.gen.ModOreGenerators;
 import wffirilat.betterghasts.items.enchantments.ModEnchantments;
 import wffirilat.betterghasts.items.recipes.ModRecipies;
 import wffirilat.betterghasts.lib.Constants;

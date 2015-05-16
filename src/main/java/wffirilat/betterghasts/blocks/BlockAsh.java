@@ -11,10 +11,10 @@ public class BlockAsh extends BlockFalling {
 
 	public BlockAsh() {
 		super();
-		setBlockName(Constants.MODID + "_" + name);
-		setBlockTextureName(Constants.MODID + ":" + name);
-		setCreativeTab(CreativeTabs.tabBlock);
-		GameRegistry.registerBlock(this, name);
+		this.setBlockName(Constants.MODID + "_" + this.name);
+		this.setBlockTextureName(Constants.MODID + ":" + this.name);
+		this.setCreativeTab(CreativeTabs.tabBlock);
+		GameRegistry.registerBlock(this, this.name);
 	}
 
 }
