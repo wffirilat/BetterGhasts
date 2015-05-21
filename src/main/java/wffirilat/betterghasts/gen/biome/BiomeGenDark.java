@@ -15,7 +15,8 @@ public class BiomeGenDark extends BiomeGenJungle {
 		this.topBlock = ModBlocks.shadow;
 		this.fillerBlock = ModBlocks.shadow;
 	}
-	
+
+	@Override
 	public int getSkyColorByTemp(float temp) {
 		return 0;
 	}

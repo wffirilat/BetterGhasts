@@ -439,8 +439,7 @@ public class ChunkProviderUnderdark implements IChunkProvider {
 	 * only during world unload. Currently unimplemented.
 	 */
 	@Override
-	public void saveExtraData() {
-	}
+	public void saveExtraData() {}
 
 	/**
 	 * Unloads chunks that are marked to be unloaded. This is not guaranteed to
