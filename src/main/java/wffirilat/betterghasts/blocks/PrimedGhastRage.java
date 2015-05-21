@@ -35,8 +35,7 @@ public class PrimedGhastRage extends Entity {
 	}
 
 	@Override
-	protected void entityInit() {
-	}
+	protected void entityInit() {}
 
 	/**
 	 * returns if this entity triggers Block.onEntityWalking on the blocks they
