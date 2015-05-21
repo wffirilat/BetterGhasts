@@ -39,6 +39,7 @@ public class WorldGenSpikes extends WorldGenerator {
 		this.heightOffset = heightOffset;
 	}
 
+	@Override
 	public boolean generate(World world, Random random, int x, int y, int z) {
 		while (world.isAirBlock(x, y, z) && y > 2) {
 			--y;
@@ -56,14 +57,14 @@ public class WorldGenSpikes extends WorldGenerator {
 		int x1;
 
 		for (y1 = 0; y1 < height; ++y1) {
-			float f = (1.0F - (float) y1 / (float) height) * (float) width;
+			float f = (1.0F - (float) y1 / (float) height) * width;
 			k1 = MathHelper.ceiling_float_int(f);
 
 			for (x1 = -k1; x1 <= k1; ++x1) {
-				float f1 = (float) MathHelper.abs_int(x1) - 0.25F;
+				float f1 = MathHelper.abs_int(x1) - 0.25F;
 
 				for (int z1 = -k1; z1 <= k1; ++z1) {
-					float f2 = (float) MathHelper.abs_int(z1) - 0.25F;
+					float f2 = MathHelper.abs_int(z1) - 0.25F;
 
 					if ((x1 == 0 && z1 == 0 || f1 * f1 + f2 * f2 <= f * f) && (x1 != -k1 && x1 != k1 && z1 != -k1 && z1 != k1 || random.nextFloat() <= 0.75F)) {
 						Block block = world.getBlock(x + x1, y + y1, z + z1);

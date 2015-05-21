@@ -29,6 +29,7 @@ public class BiomeDecoratorVolcano extends BiomeDecorator {
 
 	}
 
+	@Override
 	protected void genDecorations(BiomeGenBase biome) {
 		super.genDecorations(biome);
 		this.generateOres();

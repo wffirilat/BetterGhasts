@@ -21,23 +21,23 @@ public class ModEvents {
 		MinecraftForge.TERRAIN_GEN_BUS.register(terrainEvents);
 		MinecraftForge.ORE_GEN_BUS.register(oreGenEvents);
 	}
-	
-	/* FORMAT
-	 * @SubscribeEvent
-	 * public void whatEver(<EventType> event) {
-	 * 	   doSomething;
-	 * }
+
+	/*
+	 * FORMAT
+	 * 
+	 * @SubscribeEvent public void whatEver(<EventType> event) { doSomething; }
 	 */
-	
+
 	@SubscribeEvent
 	public void ghastTears(AnvilUpdateEvent event) {
 		if (event.right.getItem() == ModItems.flameGhastTear) {
 			ItemStack i = event.left.copy();
 			i.addEnchantment(Enchantment.fireAspect, 3);
 			event.output = i;
-			event.cost = 1; // is it possible to make it free? cost = 0 doesn't work
+			event.cost = 1; // is it possible to make it free? cost = 0 doesn't
+							// work
 		}
-		//TODO 2- more ghast tear enchantments
+		// TODO 2- more ghast tear enchantments
 	}
 
 }

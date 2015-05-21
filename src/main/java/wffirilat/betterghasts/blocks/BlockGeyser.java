@@ -30,17 +30,20 @@ public class BlockGeyser extends Block {
 		GameRegistry.registerBlock(this, name);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister p_149651_1_) {
 		this.blockIcon = p_149651_1_.registerIcon(this.getTextureName() + "_side");
 		this.topTexture = p_149651_1_.registerIcon(this.getTextureName() + "_top");
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		return side == 1 ? this.topTexture : this.blockIcon;
 	}
 
+	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		if (!this.turnOn(world, x, y, z, rand)) {
 			this.turnOff(world, x, y, z);
@@ -89,6 +92,7 @@ public class BlockGeyser extends Block {
 		world.setBlockMetadataWithNotify(x, y, z, rand.nextInt(15), 3);
 	}
 
+	@Override
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int par6, float par7, float par8, float par9) {
 		if (!this.turnOff(w, x, y, z) && p.capabilities.isCreativeMode) {
 			return this.forceOn(w, x, y, z);

@@ -22,11 +22,13 @@ public class FlameGhast extends EntityGhast {
 		super(world);
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 	}
 
+	@Override
 	protected void updateEntityActionState() {
 		if (!this.worldObj.isRemote && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL) {
 			this.setDead();
@@ -40,14 +42,14 @@ public class FlameGhast extends EntityGhast {
 		double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
 		if (d3 < 1.0D || d3 > 3600.0D) {
-			this.waypointX = this.posX + (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			this.waypointY = this.posY + (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			this.waypointZ = this.posZ + (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+			this.waypointX = this.posX + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
+			this.waypointY = this.posY + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
+			this.waypointZ = this.posZ + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
 		}
 
 		if (this.courseChangeCooldown-- <= 0) {
 			this.courseChangeCooldown += this.rand.nextInt(5) + 2;
-			d3 = (double) MathHelper.sqrt_double(d3);
+			d3 = MathHelper.sqrt_double(d3);
 
 			if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3)) {
 				this.motionX += d0 / d3 * 0.2D;
@@ -117,7 +119,7 @@ public class FlameGhast extends EntityGhast {
 		double d6 = (this.waypointZ - this.posZ) / p_70790_7_;
 		AxisAlignedBB axisalignedbb = this.boundingBox.copy();
 
-		for (int i = 1; (double) i < p_70790_7_; ++i) {
+		for (int i = 1; i < p_70790_7_; ++i) {
 			axisalignedbb.offset(d4, d5, d6);
 
 			if (!this.worldObj.getCollidingBoundingBoxes(this, axisalignedbb).isEmpty()) {
@@ -132,13 +134,13 @@ public class FlameGhast extends EntityGhast {
 		double offset = 4.0D;
 		Vec3 lookVec = this.getLook(1.0F);
 		double dx = targetedEntity.posX - (this.posX + lookVec.xCoord * offset);
-		double dy = targetedEntity.boundingBox.minY + (double) (targetedEntity.height / 2.0F) - (0.5D + this.posY + (double) (this.height / 2.0F));
+		double dy = targetedEntity.boundingBox.minY + targetedEntity.height / 2.0F - (0.5D + this.posY + this.height / 2.0F);
 		double dz = targetedEntity.posZ - (this.posZ + lookVec.zCoord * offset);
 		this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1008, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
 		EntityLargeFireball fireball = new EntityLargeFireball(worldObj, this, dx, dy, dz);
 		fireball.field_92057_e = this.explosionStrength;
 		fireball.posX = this.posX + lookVec.xCoord * offset;
-		fireball.posY = this.posY + (double) (this.height / 2.0F) + 0.5D;
+		fireball.posY = this.posY + this.height / 2.0F + 0.5D;
 		fireball.posZ = this.posZ + lookVec.zCoord * offset;
 		fireball.accelerationX *= 1.5D;
 		fireball.accelerationY *= 1.5D;
@@ -146,12 +148,13 @@ public class FlameGhast extends EntityGhast {
 		worldObj.spawnEntityInWorld(fireball);
 		this.attackCounter = 0;
 	}
-	
-	protected void dropFewItems(boolean player, int looting){
+
+	@Override
+	protected void dropFewItems(boolean player, int looting) {
 		this.dropItem(ModItems.flameGhastTear, 1);
 		super.dropFewItems(player, looting);
 		super.dropFewItems(player, looting);
-		
+
 	}
 
 }
