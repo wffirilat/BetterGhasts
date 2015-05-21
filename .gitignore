@@ -10,3 +10,5 @@ $ cat .gitignore
 !gradlew.bat
 !.gitignore
 !/formatting settings
+!.gitattributes
+
