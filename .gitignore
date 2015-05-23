@@ -11,4 +11,5 @@ $ cat .gitignore
 !.gitignore
 !/formatting settings
 !.gitattributes
+!/builds
 
