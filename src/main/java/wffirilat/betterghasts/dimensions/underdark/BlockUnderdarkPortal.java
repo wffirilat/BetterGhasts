@@ -11,7 +11,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
@@ -40,30 +39,6 @@ public class BlockUnderdarkPortal extends BlockBreakable {
 		this.setBlockTextureName(Constants.MODID + ":" + name);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		GameRegistry.registerBlock(this, name);
-	}
-
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
-		super.updateTick(world, x, y, z, rand);
-
-		if (world.provider.isSurfaceWorld() && world.getGameRules().getGameRuleBooleanValue("doMobSpawning") && rand.nextInt(2000) < world.difficultySetting.getDifficultyId()) {
-			int l;
-
-			for (l = y; !World.doesBlockHaveSolidTopSurface(world, x, l, z) && l > 0; --l) {
-				;
-			}
-
-			if (l > 0 && !world.getBlock(x, l + 1, z).isNormalCube()) {
-				Entity entity = ItemMonsterPlacer.spawnCreature(world, 57, x + 0.5D, l + 1.1D, z + 0.5D);
-
-				if (entity != null) {
-					entity.timeUntilPortal = entity.getPortalCooldown();
-				}
-			}
-		}
 	}
 
 	/**
